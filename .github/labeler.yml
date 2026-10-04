@@ -1,0 +1,33 @@
+'pr::docs':
+  - changed-files:
+      - any-glob-to-any-file: '**.md'
+
+'pr::code':
+  - changed-files:
+      - any-glob-to-any-file: ['src/**/*.js', 'src/**/*.ts']
+
+'pr::types':
+  - changed-files:
+      - any-glob-to-any-file: ['index.d.js', 'types.ts', 'typings.ts']
+
+'pr::tests':
+  - changed-files:
+      - any-glob-to-any-file:
+          ['tests/**.js', 'tests/**.ts', '**/*.test.js', '**/*.test.ts']
+
+'pr::github':
+  - changed-files:
+      - any-glob-to-any-file: '.github/**'
+
+'pr::ci':
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**']
+
+'pr::feature':
+  - head-branch: ['feature', 'feat', 'enhancement']
+
+'pr::patch':
+  - head-branch: ['update', 'edit']
+
+'pr::fix':
+  - head-branch: ['fix', 'bug', 'hotfix']

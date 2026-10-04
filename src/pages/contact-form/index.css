@@ -1,0 +1,42 @@
+label > span {
+  color: red;
+}
+
+#contacts {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-strong);
+}
+
+#contacts th,
+#contacts td {
+  border: 1px solid var(--border);
+  padding: 8px;
+}
+
+#contacts th {
+  background: var(--sidebar-bg);
+  color: var(--text-strong);
+  text-align: left;
+}
+
+#notification[data-notification-type=''] {
+  display: none;
+}
+
+#notification[data-notification-type='error'],
+#notification[data-notification-type='success'] {
+  display: block;
+}
+
+#notification[data-notification-type='error'] {
+  color: red;
+  margin-top: 1rem;
+}
+
+#notification[data-notification-type='success'] {
+  color: rgb(88, 219, 88);
+  margin-top: 1rem;
+}
