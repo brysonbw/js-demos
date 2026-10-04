@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   const isDevHTTPSEnabled =
     typeof env.HTTPS_CERT === 'string' && typeof env.HTTPS_KEY === 'string';
   return {
+    base: mode === 'production' ? '/js-demos/' : '/',
     server: isDevHTTPSEnabled
       ? {
           https: {
