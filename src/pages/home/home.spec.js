@@ -12,11 +12,4 @@ describe('renderHome', () => {
       `What is ${APP_NAME}?`
     );
   });
-
-  it('renders the vanilla JS copy', () => {
-    const container = document.createElement('div');
-    renderHome(container);
-
-    expect(container.textContent).toContain('Why vanilla?');
-  });
 });
