@@ -93,6 +93,17 @@ export const routes = [
         (module) => module.renderProductsList
       ),
   },
+  {
+    route: ROUTES.IMAGE_CAROUSEL.route,
+    title: ROUTES.IMAGE_CAROUSEL.title,
+    render: () =>
+      renderPage(
+        import('./pages/image-carousel/index.js'),
+        import('./pages/image-carousel/index.js?raw'),
+        [import('./pages/image-carousel/index.css?raw')],
+        (module) => module.renderImageCarousel
+      ),
+  },
 ];
 
 export const pageRenderers = new Map([
