@@ -4,10 +4,6 @@
 
 A collection of practical, browser-based JavaScript examples — each one built in just JavaScript, no frameworks.
 
-## Why just Javascript?
-
-Frameworks come and go, but the platform endures. These demos are a reminder of how much you can do with just the browser's own APIs.
-
 ## Getting started
 
 Requires [Node](https://nodejs.org/) 24+ and [pnpm](https://pnpm.io/installation).
