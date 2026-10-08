@@ -55,6 +55,13 @@ const ROUTES = Object.freeze({
       'View a list of products, with options to add or remove items to your wishlist.',
     hash: '#/products-list',
   }),
+  IMAGE_CAROUSEL: Object.freeze({
+    route: 'image-carousel',
+    title: 'Image Carousel',
+    description:
+      'Browse through a collection of images using the carousel navigation.',
+    hash: '#/image-carousel',
+  }),
 });
 
 // Ordered list of demo pages - position determines the demo number display/text
@@ -64,6 +71,7 @@ const DEMO_LIST_ORDER = Object.freeze([
   ROUTES.ACCORDION,
   ROUTES.TABS,
   ROUTES.PRODUCTS_LIST,
+  ROUTES.IMAGE_CAROUSEL,
 ]);
 
 export {
