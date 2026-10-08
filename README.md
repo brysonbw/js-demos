@@ -1,6 +1,6 @@
 # JS Demos
 
-![CI](https://img.shields.io/github/actions/workflow/status/brysonbw/js-demos/ci.yml?branch=main&style=flat&logo=github&label=CI) ![Build & Deploy](https://img.shields.io/github/actions/workflow/status/brysonbw/js-demos/deploy.yml?branch=main&style=flat&logo=github&label=Deploy)
+[![Version](https://img.shields.io/github/v/tag/brysonbw/js-demos?style=flat&label=version)](https://github.com/brysonbw/js-demos/releases) ![CI](https://img.shields.io/github/actions/workflow/status/brysonbw/js-demos/ci.yml?branch=main&style=flat&logo=github&label=CI) ![Build & Deploy](https://img.shields.io/github/actions/workflow/status/brysonbw/js-demos/deploy.yml?branch=main&style=flat&logo=github&label=Deploy)
 
 A collection of practical, browser-based JavaScript examples — each one built in just JavaScript, no frameworks.
 
