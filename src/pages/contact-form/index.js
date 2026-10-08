@@ -6,12 +6,6 @@ import './index.css';
  */
 function renderContactForm(container) {
   container.innerHTML = `
-    <header class="page-heading">
-      <p class="eyebrow">Page 01</p>
-      <h1 id="page-title">Contact form</h1>
-      <p>Add a new contact using the form below — with client-side validation, inline notifications, and a contacts table that updates dynamically.</p>
-    </header>
-
      <div id="notification" role="alert" data-notification-type=""></div>
 
     <form class="form" id="contact-form">
@@ -30,7 +24,7 @@ function renderContactForm(container) {
     </form>
 
     <h3>Contacts</h3>
-    <table id="contacts">
+    <table class="data-table" id="contacts">
       <thead>
         <tr>
           <th>Name</th>

@@ -26,6 +26,12 @@
 'pr::feature':
   - head-branch: ['feature', 'feat', 'enhancement']
 
+'pr::chore':
+  - head-branch: ['chore', 'maintenance']
+
+'pr::refactor':
+  - head-branch: ['refactor']
+
 'pr::patch':
   - head-branch: ['update', 'edit']
 

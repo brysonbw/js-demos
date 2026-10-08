@@ -5,7 +5,8 @@ import './index.css';
  * @returns {void}
  */
 function renderTabs(container) {
-  container.innerHTML = `<div>
+  container.innerHTML = `
+    <div>
       <div id="tabs">
         <button>HTML</button>
         <button>CSS</button>

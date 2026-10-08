@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
       setupFiles: './src/testing/setup.js',
       include: ['src/**/*.{spec,test}.js', 'tests/**/*.{spec,test}.js'],
       coverage: {
-        reporter: ['text', 'html'],
+        reporter: ['text'],
         exclude: [...configDefaults.exclude, 'dist'],
         clean: true,
         cleanOnRerun: false,

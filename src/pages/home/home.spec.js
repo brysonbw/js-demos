@@ -1,15 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { APP_NAME } from '../../utils/constants.js';
 import { renderHome } from './index.js';
 
 describe('renderHome', () => {
-  it('renders the heading with the app name', () => {
+  it('renders the intro paragraphs', () => {
     const container = document.createElement('div');
     renderHome(container);
 
-    expect(container.querySelector('#page-title').textContent).toBe(
-      `What is ${APP_NAME}?`
-    );
+    expect(container.querySelectorAll('p.home')).toHaveLength(2);
   });
 });

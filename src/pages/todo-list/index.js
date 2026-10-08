@@ -6,11 +6,6 @@ import './index.css';
  */
 function renderTodoList(container) {
   container.innerHTML = `
-    <header class="page-heading">
-      <p class="eyebrow">Page 03</p>
-      <h1 id="page-title">Todo List</h1>
-      <p>Add and remove tasks locally in your browser.</p>
-    </header>
     <form class="form" id="todo-form">
       <label for="todo-input">New todo</label>
       <input class="input" id="todo-input" type="text" placeholder="Add your todo" />

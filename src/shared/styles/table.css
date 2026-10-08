@@ -1,0 +1,27 @@
+.data-table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  border-collapse: collapse;
+  background: var(--surface);
+  color: var(--text-strong);
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.625rem;
+  border: 1px solid var(--border);
+}
+
+.data-table th {
+  text-align: left;
+}
+
+.data-table--centered th,
+.data-table--centered td {
+  text-align: center;
+}
+
+.data-table th {
+  background: var(--sidebar-bg);
+}

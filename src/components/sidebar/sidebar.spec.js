@@ -28,6 +28,14 @@ describe('createSidebar', () => {
     expect(links[1].querySelector('span').textContent).toBe('01');
   });
 
+  it('orders links by the demo list order regardless of routes order', () => {
+    const reversed = createSidebar([...routes].reverse());
+    const hrefs = [...reversed.element.querySelectorAll('.sidebar-link')].map(
+      (link) => link.getAttribute('href')
+    );
+    expect(hrefs).toEqual([ROUTES.HOME.hash, '#/contact', '#/tabs']);
+  });
+
   it('links home to the home hash', () => {
     const homeLink = sidebar.element.querySelector(
       `[data-page-id="${ROUTES.HOME.route}"]`
@@ -89,10 +97,10 @@ describe('createSidebar', () => {
     expect(previous).not.toHaveAttribute('aria-current');
   });
 
-  it('numbers links sequentially starting at 01', () => {
+  it('numbers links by their position in the demo list order', () => {
     const numbers = [...sidebar.element.querySelectorAll('.sidebar-link span')]
       .map((span) => span.textContent)
       .filter((text) => /^\d+$/.test(text));
-    expect(numbers).toEqual(['01', '02']);
+    expect(numbers).toEqual(['01', '04']);
   });
 });
