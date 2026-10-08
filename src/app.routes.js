@@ -1,4 +1,5 @@
-import { ROUTES } from '../utils/constants.js';
+import { ROUTES } from './utils/constants.js';
+import { stripModuleSyntax } from './utils/helpers.js';
 
 /**
  * @param {Promise<Record<string, function(): void>>} modulePromise
@@ -21,7 +22,7 @@ async function renderPage(
 
   return {
     render: resolveRender(module),
-    javascript,
+    javascript: stripModuleSyntax(javascript),
     css: cssModules.map((cssModule) => cssModule.default).join('\n\n'),
   };
 }
@@ -32,11 +33,12 @@ export const routes = [
     title: ROUTES.CONTACT.title,
     render: () =>
       renderPage(
-        import('./contact-form/index.js'),
-        import('./contact-form/index.js?raw'),
+        import('./pages/contact-form/index.js'),
+        import('./pages/contact-form/index.js?raw'),
         [
-          import('./contact-form/index.css?raw'),
-          import('../shared/styles/form.css?raw'),
+          import('./pages/contact-form/index.css?raw'),
+          import('./shared/styles/form.css?raw'),
+          import('./shared/styles/table.css?raw'),
         ],
         (module) => module.renderContactForm
       ),
@@ -46,11 +48,11 @@ export const routes = [
     title: ROUTES.TODO_LIST.title,
     render: () =>
       renderPage(
-        import('./todo-list/index.js'),
-        import('./todo-list/index.js?raw'),
+        import('./pages/todo-list/index.js'),
+        import('./pages/todo-list/index.js?raw'),
         [
-          import('./todo-list/index.css?raw'),
-          import('../shared/styles/form.css?raw'),
+          import('./pages/todo-list/index.css?raw'),
+          import('./shared/styles/form.css?raw'),
         ],
         (module) => module.renderTodoList
       ),
@@ -60,9 +62,9 @@ export const routes = [
     title: ROUTES.ACCORDION.title,
     render: () =>
       renderPage(
-        import('./accordion/index.js'),
-        import('./accordion/index.js?raw'),
-        [import('./accordion/index.css?raw')],
+        import('./pages/accordion/index.js'),
+        import('./pages/accordion/index.js?raw'),
+        [import('./pages/accordion/index.css?raw')],
         (module) => module.renderAccordion
       ),
   },
@@ -71,10 +73,24 @@ export const routes = [
     title: ROUTES.TABS.title,
     render: () =>
       renderPage(
-        import('./tabs/index.js'),
-        import('./tabs/index.js?raw'),
-        [import('./tabs/index.css?raw')],
+        import('./pages/tabs/index.js'),
+        import('./pages/tabs/index.js?raw'),
+        [import('./pages/tabs/index.css?raw')],
         (module) => module.renderTabs
+      ),
+  },
+  {
+    route: ROUTES.PRODUCTS_LIST.route,
+    title: ROUTES.PRODUCTS_LIST.title,
+    render: () =>
+      renderPage(
+        import('./pages/products-list/index.js'),
+        import('./pages/products-list/index.js?raw'),
+        [
+          import('./shared/styles/button.css?raw'),
+          import('./shared/styles/table.css?raw'),
+        ],
+        (module) => module.renderProductsList
       ),
   },
 ];
@@ -82,12 +98,12 @@ export const routes = [
 export const pageRenderers = new Map([
   [
     ROUTES.HOME.route,
-    () => import('./home/index.js').then(({ renderHome }) => renderHome),
+    () => import('./pages/home/index.js').then(({ renderHome }) => renderHome),
   ],
   [
     ROUTES.NOT_FOUND.route,
     () =>
-      import('./not-found/index.js').then(
+      import('./pages/not-found/index.js').then(
         ({ renderNotFound }) => renderNotFound
       ),
   ],

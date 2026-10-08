@@ -1,5 +1,5 @@
 // Type definitions
 
-/** @typedef {Array<{ route: string, title: string }>} Routes */
+/** @typedef {Array<{ route: string, title: string, description?: string, hash?: string }>} Routes */
 
 export {};

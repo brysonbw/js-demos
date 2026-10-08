@@ -1,4 +1,4 @@
-/** @returns {number} The current year */
+/** @returns {number} */
 function getCurrentYear() {
   return new Date().getFullYear();
 }

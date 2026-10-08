@@ -1,6 +1,6 @@
-import { APP_NAME, ROUTES } from '../../utils/constants.js';
+import { APP_NAME, DEMO_LIST_ORDER, ROUTES } from '../../utils/constants.js';
 import { getCurrentYear } from '../../utils/datetime.js';
-import { padIndex } from '../../utils/helpers.js';
+import { getDemoNumber } from '../../utils/helpers.js';
 import './index.css';
 
 /**
@@ -8,11 +8,18 @@ import './index.css';
  * @returns {string}
  */
 function pageLinks(routes) {
-  return routes
+  // Order by DEMO_LIST_ORDER regardless of routes order - unlisted routes go last
+  const rank = (route) => {
+    const index = DEMO_LIST_ORDER.findIndex((demo) => demo.route === route);
+    return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+  };
+
+  return [...routes]
+    .sort((a, b) => rank(a.route) - rank(b.route))
     .map(
-      (page, index) => `
+      (page) => `
         <a class="sidebar-link" href="#/${page.route}" data-page-id="${page.route}">
-          <span>${padIndex(index)}</span>${page.title}
+          <span>${getDemoNumber(page.route)}</span>${page.title}
         </a>
       `
     )

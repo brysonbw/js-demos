@@ -1,13 +1,17 @@
+// Styles
 import './app.css';
 import './shared/styles/button.css';
 import './shared/styles/form.css';
+import './shared/styles/table.css';
+
 import hljs from 'highlight.js/lib/core';
 import cssLanguage from 'highlight.js/lib/languages/css';
 import javascriptLanguage from 'highlight.js/lib/languages/javascript';
 import { createSidebar } from './components/sidebar/index.js';
 import { createTopbar } from './components/top-bar/index.js';
-import { routes, pageRenderers } from './pages/index.js';
+import { routes, pageRenderers } from './app.routes.js';
 import { APP_NAME, ROUTES, STORAGE_KEYS } from './utils/constants.js';
+import { createPageHeading } from './utils/helpers.js';
 
 // Register languages for syntax highlighting
 hljs.registerLanguage('css', cssLanguage);
@@ -154,6 +158,15 @@ async function renderCurrentRoute() {
     const mountPage = await pageRenderers.get(pageId)();
     if (currentRenderRequest !== renderRequestId) return;
     mountPage(pageView);
+    // Prepend the page heading to the page view
+    const headingOverrides = new Map([
+      [
+        ROUTES.HOME.route,
+        { eyebrow: ROUTES.HOME.title, title: `What is ${APP_NAME}?` },
+      ],
+      [ROUTES.NOT_FOUND.route, { eyebrow: '404' }],
+    ]);
+    pageView.prepend(createPageHeading(pageId, headingOverrides.get(pageId)));
     return;
   }
 
@@ -173,6 +186,7 @@ async function renderCurrentRoute() {
     'css'
   );
   loadedPage.render(pageView);
+  pageView.prepend(createPageHeading(page.route));
 }
 
 /**

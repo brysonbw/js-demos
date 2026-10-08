@@ -2,26 +2,6 @@ label > span {
   color: red;
 }
 
-#contacts {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-strong);
-}
-
-#contacts th,
-#contacts td {
-  border: 1px solid var(--border);
-  padding: 8px;
-}
-
-#contacts th {
-  background: var(--sidebar-bg);
-  color: var(--text-strong);
-  text-align: left;
-}
-
 #notification[data-notification-type=''] {
   display: none;
 }
