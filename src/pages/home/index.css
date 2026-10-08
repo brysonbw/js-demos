@@ -2,3 +2,20 @@
   max-width: 640px;
   color: var(--text);
 }
+
+.home-section + .home-section {
+  margin-top: 1.75rem;
+}
+
+.home-section h2 {
+  margin: 0 0 0.5rem;
+  color: var(--text-strong);
+  font-family: var(--heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.home-section > div {
+  line-height: 1.7;
+}
