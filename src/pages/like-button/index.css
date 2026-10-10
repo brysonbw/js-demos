@@ -1,0 +1,21 @@
+#likeButton {
+  border: 2px solid #888;
+  background: transparent;
+  color: #888;
+}
+
+#likeButton[aria-pressed='false']:hover:not(:disabled),
+#likeButton[aria-pressed='false']:focus-visible {
+  border-color: #f00;
+  color: #f00;
+}
+
+#likeButton[aria-pressed='true'] {
+  border-color: #f00;
+  background-color: #f00;
+  color: #fff;
+}
+
+#likeButton:disabled {
+  cursor: wait;
+}

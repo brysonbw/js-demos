@@ -62,6 +62,13 @@ const ROUTES = Object.freeze({
       'Browse through a collection of images using the carousel navigation.',
     hash: '#/image-carousel',
   }),
+  LIKE_BUTTON: Object.freeze({
+    route: 'like-button',
+    title: 'Like Button',
+    description:
+      'Interact with a like button component that toggles its state when clicked.',
+    hash: '#/like-button',
+  }),
 });
 
 // Ordered list of demo pages - position determines the demo number display/text
@@ -72,6 +79,7 @@ const DEMO_LIST_ORDER = Object.freeze([
   ROUTES.TABS,
   ROUTES.PRODUCTS_LIST,
   ROUTES.IMAGE_CAROUSEL,
+  ROUTES.LIKE_BUTTON,
 ]);
 
 export {
