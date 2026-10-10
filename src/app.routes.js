@@ -4,8 +4,8 @@ import { stripModuleSyntax } from './utils/helpers.js';
 /**
  * @param {Promise<Record<string, function(): void>>} modulePromise
  * @param {Promise<{ default: string }>} javascriptPromise
- * @param {Array<Promise<{ default: string }>>} cssPromises
- * @param {function(Record<string, function(): void>): function(): void} resolveRender
+ * @param {Array<Promise<{ default: string }>> | function(Record<string, function(): void>): function(): void} cssPromises
+ * @param {function(Record<string, function(): void>): function(): void} [resolveRender]
  * @returns {Promise<{ render: function(): void, javascript: string, css: string }>}
  */
 async function renderPage(
@@ -14,6 +14,11 @@ async function renderPage(
   cssPromises,
   resolveRender
 ) {
+  if (typeof cssPromises === 'function') {
+    resolveRender = cssPromises;
+    cssPromises = [];
+  }
+
   const [module, { default: javascript }, ...cssModules] = await Promise.all([
     modulePromise,
     javascriptPromise,
@@ -102,6 +107,20 @@ export const routes = [
         import('./pages/image-carousel/index.js?raw'),
         [import('./pages/image-carousel/index.css?raw')],
         (module) => module.renderImageCarousel
+      ),
+  },
+  {
+    route: ROUTES.LIKE_BUTTON.route,
+    title: ROUTES.LIKE_BUTTON.title,
+    render: () =>
+      renderPage(
+        import('./pages/like-button/index.js'),
+        import('./pages/like-button/index.js?raw'),
+        [
+          import('./pages/like-button/index.css?raw'),
+          import('./shared/styles/button.css?raw'),
+        ],
+        (module) => module.renderLikeButton
       ),
   },
 ];

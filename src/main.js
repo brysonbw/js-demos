@@ -34,7 +34,7 @@ mainContent.innerHTML = `
 
 const pageView = mainContent.querySelector('#panel-preview');
 const tabList = mainContent.querySelector('[role="tablist"]');
-const tabs = [...tabList.querySelectorAll('[role="tab"]')];
+let tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
 const tabPanels = [...mainContent.querySelectorAll('[role="tabpanel"]')];
 
 const sidebar = createSidebar(routes);
@@ -175,6 +175,9 @@ async function renderCurrentRoute() {
   activateTab(tabs[0]);
   const loadedPage = await page.render();
   if (currentRenderRequest !== renderRequestId) return;
+  mainContent.querySelector('#tab-css').hidden = loadedPage.css.trim() === '';
+  tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+  activateTab(tabs[0]);
   setHighlightedCode(
     mainContent.querySelector('#panel-js code'),
     loadedPage.javascript,
