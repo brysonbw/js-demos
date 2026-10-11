@@ -1,6 +1,7 @@
 // Styles
 import './app.css';
 import './shared/styles/button.css';
+import './shared/styles/dialog.css';
 import './shared/styles/form.css';
 import './shared/styles/table.css';
 
@@ -18,10 +19,10 @@ hljs.registerLanguage('css', cssLanguage);
 hljs.registerLanguage('javascript', javascriptLanguage);
 
 // Create main content and layout
-const app = document.querySelector('#app');
-const mainContent = document.createElement('main');
-mainContent.className = 'main-content';
-mainContent.innerHTML = `
+const appEl = document.querySelector('#app');
+const mainContentEl = document.createElement('main');
+mainContentEl.className = 'main-content';
+mainContentEl.innerHTML = `
   <div class="page-tabs" role="tablist" aria-label="Page view">
     <button class="page-tab active" id="tab-preview" type="button" role="tab" aria-selected="true" aria-controls="panel-preview" data-view="preview">Preview</button>
     <button class="page-tab" id="tab-js" type="button" role="tab" aria-selected="false" aria-controls="panel-js" tabindex="-1" data-view="js">JS</button>
@@ -32,42 +33,43 @@ mainContent.innerHTML = `
   <section class="source-panel" id="panel-css" role="tabpanel" aria-labelledby="tab-css" tabindex="0" hidden><pre><code></code></pre></section>
 `;
 
-const pageView = mainContent.querySelector('#panel-preview');
-const tabList = mainContent.querySelector('[role="tablist"]');
-let tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
-const tabPanels = [...mainContent.querySelectorAll('[role="tabpanel"]')];
+const pageViewEl = mainContentEl.querySelector('#panel-preview');
+const tabListEl = mainContentEl.querySelector('[role="tablist"]');
+let tabEls = Array.from(tabListEl.querySelectorAll('[role="tab"]'));
+const tabPanelEls = [...mainContentEl.querySelectorAll('[role="tabpanel"]')];
 
 const sidebar = createSidebar(routes);
 const topbar = createTopbar();
 
-const appLayout = document.createElement('div');
-appLayout.className = 'app-layout';
-appLayout.append(sidebar.element, mainContent);
-app.replaceChildren(topbar.element, appLayout, sidebar.dialog);
+const appLayoutEl = document.createElement('div');
+appLayoutEl.className = 'app-layout';
+appLayoutEl.append(sidebar.element, mainContentEl);
+appEl.replaceChildren(topbar.element, appLayoutEl, sidebar.dialog);
 
 // Attach event listeners for topbar buttons, hash changes, and tab interactions
 topbar.menuButton.addEventListener('click', sidebar.openMenu);
 topbar.themeButton.addEventListener('click', toggleTheme);
 window.addEventListener('hashchange', renderCurrentRoute);
-tabList.addEventListener('click', function (event) {
+tabListEl.addEventListener('click', function (event) {
   const tab = event.target.closest('[role="tab"]');
   if (tab) activateTab(tab);
 });
-tabList.addEventListener('keydown', function (event) {
-  const currentIndex = tabs.indexOf(document.activeElement);
+tabListEl.addEventListener('keydown', function (event) {
+  const currentIndex = tabEls.indexOf(document.activeElement);
   if (currentIndex < 0) return;
 
   let nextIndex;
-  if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+  if (event.key === 'ArrowRight')
+    nextIndex = (currentIndex + 1) % tabEls.length;
   if (event.key === 'ArrowLeft')
-    nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    nextIndex = (currentIndex - 1 + tabEls.length) % tabEls.length;
   if (event.key === 'Home') nextIndex = 0;
-  if (event.key === 'End') nextIndex = tabs.length - 1;
+  if (event.key === 'End') nextIndex = tabEls.length - 1;
   if (nextIndex === undefined) return;
 
   event.preventDefault();
-  tabs.at(nextIndex).focus();
-  activateTab(tabs.at(nextIndex));
+  tabEls.at(nextIndex).focus();
+  activateTab(tabEls.at(nextIndex));
 });
 
 const themePreference = window.matchMedia('(prefers-color-scheme: dark)');
@@ -107,13 +109,13 @@ function toggleTheme() {
  */
 function activateTab(selectedTab) {
   const selectedView = selectedTab.dataset.view;
-  tabs.forEach((tab) => {
+  tabEls.forEach((tab) => {
     const active = tab === selectedTab;
     tab.classList.toggle('active', active);
     tab.setAttribute('aria-selected', String(active));
     tab.tabIndex = active ? 0 : -1;
   });
-  tabPanels.forEach((panel) => {
+  tabPanelEls.forEach((panel) => {
     panel.hidden = panel.id !== `panel-${selectedView}`;
   });
 }
@@ -153,11 +155,11 @@ async function renderCurrentRoute() {
     const pageTitle =
       pageId === ROUTES.HOME.route ? ROUTES.HOME.title : ROUTES.NOT_FOUND.title;
     document.title = `${APP_NAME} | ${pageTitle}`;
-    tabList.hidden = true;
-    activateTab(tabs[0]);
+    tabListEl.hidden = true;
+    activateTab(tabEls[0]);
     const mountPage = await pageRenderers.get(pageId)();
     if (currentRenderRequest !== renderRequestId) return;
-    mountPage(pageView);
+    mountPage(pageViewEl);
     // Prepend the page heading to the page view
     const headingOverrides = new Map([
       [
@@ -166,30 +168,30 @@ async function renderCurrentRoute() {
       ],
       [ROUTES.NOT_FOUND.route, { eyebrow: '404' }],
     ]);
-    pageView.prepend(createPageHeading(pageId, headingOverrides.get(pageId)));
+    pageViewEl.prepend(createPageHeading(pageId, headingOverrides.get(pageId)));
     return;
   }
 
   document.title = `${APP_NAME} | ${page.title}`;
-  tabList.hidden = false;
-  activateTab(tabs[0]);
+  tabListEl.hidden = false;
+  activateTab(tabEls[0]);
   const loadedPage = await page.render();
   if (currentRenderRequest !== renderRequestId) return;
-  mainContent.querySelector('#tab-css').hidden = loadedPage.css.trim() === '';
-  tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
-  activateTab(tabs[0]);
+  mainContentEl.querySelector('#tab-css').hidden = loadedPage.css.trim() === '';
+  tabEls = Array.from(tabListEl.querySelectorAll('[role="tab"]'));
+  activateTab(tabEls[0]);
   setHighlightedCode(
-    mainContent.querySelector('#panel-js code'),
+    mainContentEl.querySelector('#panel-js code'),
     loadedPage.javascript,
     'javascript'
   );
   setHighlightedCode(
-    mainContent.querySelector('#panel-css code'),
+    mainContentEl.querySelector('#panel-css code'),
     loadedPage.css,
     'css'
   );
-  loadedPage.render(pageView);
-  pageView.prepend(createPageHeading(page.route));
+  loadedPage.render(pageViewEl);
+  pageViewEl.prepend(createPageHeading(page.route));
 }
 
 /**

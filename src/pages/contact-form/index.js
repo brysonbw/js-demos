@@ -42,19 +42,19 @@ function renderContactForm(container) {
     </table>
   `;
 
-  const contactForm = container.querySelector('#contact-form');
-  const nameInput = container.querySelector('#name');
-  const mobileNumberInput = container.querySelector('#mobileNumber');
-  const emailInput = container.querySelector('#email');
+  const contactFormEl = container.querySelector('#contact-form');
+  const nameInputEl = container.querySelector('#name');
+  const mobileNumberInputEl = container.querySelector('#mobileNumber');
+  const emailInputEl = container.querySelector('#email');
 
-  const notification = container.querySelector('#notification');
+  const notificationEl = container.querySelector('#notification');
 
   const CONTACT_NAME_REGEX = /^[A-Za-z\s]{1,20}$/;
   const MOBILE_NUMBER_REGEX = /^\d{9,10}$/;
   const EMAIL_REGEX =
     /^[A-Za-z][A-Za-z0-9.]{1,9}@[A-Za-z]{2,10}\.[A-Za-z]{2,10}$/;
 
-  contactForm.addEventListener('submit', addContact);
+  contactFormEl.addEventListener('submit', addContact);
 
   /**
    * @param {SubmitEvent} event
@@ -63,9 +63,9 @@ function renderContactForm(container) {
   function addContact(event) {
     event.preventDefault();
 
-    const name = nameInput.value.trim();
-    const mobileNumber = mobileNumberInput.value.trim();
-    const email = emailInput.value.trim();
+    const name = nameInputEl.value.trim();
+    const mobileNumber = mobileNumberInputEl.value.trim();
+    const email = emailInputEl.value.trim();
 
     // Validate form inputs
     if (!CONTACT_NAME_REGEX.test(name)) {
@@ -103,7 +103,7 @@ function renderContactForm(container) {
     }
 
     renderNotification('success', 'Contact added successfully.');
-    contactForm.reset();
+    contactFormEl.reset();
     addContactRow({ name, mobileNumber, email });
   }
 
@@ -112,22 +112,22 @@ function renderContactForm(container) {
    * @param {string} message
    */
   function renderNotification(type, message) {
-    notification.dataset.notificationType = type;
-    notification.textContent = message;
+    notificationEl.dataset.notificationType = type;
+    notificationEl.textContent = message;
   }
 
   /**
    * @param {{name: string, mobileNumber: string, email: string}} contact
    */
   function addContactRow(contact) {
-    const contactsTableBody = container.querySelector('#contacts tbody');
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${contact.name}</td>
-      <td>${contact.mobileNumber}</td>
-      <td>${contact.email}</td>
-    `;
-    contactsTableBody.appendChild(row);
+    const contactsTableBodyEl = container.querySelector('#contacts tbody');
+    const rowEl = document.createElement('tr');
+    for (const value of [contact.name, contact.mobileNumber, contact.email]) {
+      const cellEl = document.createElement('td');
+      cellEl.textContent = value;
+      rowEl.appendChild(cellEl);
+    }
+    contactsTableBodyEl.appendChild(rowEl);
   }
 }
 export { renderContactForm };

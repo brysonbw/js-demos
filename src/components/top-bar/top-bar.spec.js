@@ -6,8 +6,8 @@ import { createTopbar } from './index.js';
 describe('createTopbar', () => {
   it('renders the brand link pointing at home', () => {
     const { element } = createTopbar();
-    const brand = element.querySelector('.brand');
-    expect(brand).toHaveAttribute('href', ROUTES.HOME.hash);
+    const brandEl = element.querySelector('.brand');
+    expect(brandEl).toHaveAttribute('href', ROUTES.HOME.hash);
   });
 
   it('exposes the menu and theme buttons', () => {

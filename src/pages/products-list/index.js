@@ -56,15 +56,15 @@ function renderProductsList(container) {
   const wishlistSet = new Set();
   const removedWishlistSet = new Set();
 
-  const tableBody = container.querySelector('#productsTableBody');
-  const loadMoreBtn = container.querySelector('#loadMore');
-  const productsCountDisplay = container.querySelector('#productsCount');
+  const tableBodyEl = container.querySelector('#productsTableBody');
+  const loadMoreButtonEl = container.querySelector('#loadMore');
+  const productsCountDisplayEl = container.querySelector('#productsCount');
 
   /** @returns {void} */
   function renderRows() {
     const initialProducts = products.slice(0, productsCount);
 
-    tableBody.innerHTML = initialProducts
+    tableBodyEl.innerHTML = initialProducts
       .map((product) => {
         const isWishlisted = wishlistSet.has(product.id);
         const wishlistStatus = isWishlisted
@@ -90,16 +90,16 @@ function renderProductsList(container) {
       })
       .join('');
 
-    productsCountDisplay.textContent = `Showing ${initialProducts.length} of ${products.length} products`;
+    productsCountDisplayEl.textContent = `Showing ${initialProducts.length} of ${products.length} products`;
 
     // Hide button if all products are displayed
     if (productsCount >= products.length) {
-      loadMoreBtn.style.display = 'none';
+      loadMoreButtonEl.style.display = 'none';
     }
   }
 
   // Event Delegation - Handle onClick for wishlist button
-  tableBody.addEventListener('click', function (event) {
+  tableBodyEl.addEventListener('click', function (event) {
     const button = event.target.closest('.wishlist-btn');
     if (button instanceof HTMLElement) {
       const productId = Number(button.dataset.id);
@@ -114,7 +114,7 @@ function renderProductsList(container) {
     }
   });
 
-  loadMoreBtn.addEventListener('click', function () {
+  loadMoreButtonEl.addEventListener('click', function () {
     productsCount = Math.min(productsCount + 5, products.length);
     renderRows();
   });

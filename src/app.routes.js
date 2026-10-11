@@ -123,6 +123,21 @@ export const routes = [
         (module) => module.renderLikeButton
       ),
   },
+  {
+    route: ROUTES.MODAL.route,
+    title: ROUTES.MODAL.title,
+    render: () =>
+      renderPage(
+        import('./pages/modal/index.js'),
+        import('./pages/modal/index.js?raw'),
+        [
+          import('./pages/modal/index.css?raw'),
+          import('./shared/styles/button.css?raw'),
+          import('./shared/styles/dialog.css?raw'),
+        ],
+        (module) => module.renderModal
+      ),
+  },
 ];
 
 export const pageRenderers = new Map([

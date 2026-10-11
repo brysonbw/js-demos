@@ -48,19 +48,19 @@ function sectionLinks(routes) {
  * @returns {{element: HTMLElement, dialog: HTMLDialogElement, setActive: (pageId: string) => void, openMenu: () => void}}
  */
 function createSidebar(routes) {
-  const sidebar = document.createElement('aside');
-  sidebar.className = 'sidebar';
-  sidebar.innerHTML = `
+  const sidebarEl = document.createElement('aside');
+  sidebarEl.className = 'sidebar';
+  sidebarEl.innerHTML = `
     <nav class="sidebar-navigation" aria-label="Page navigation">
       ${sectionLinks(routes)}
     </nav>
     <div class="sidebar-footer"><span class="status-dot"></span> @${getCurrentYear()} ${APP_NAME}</div>
   `;
 
-  const dialog = document.createElement('dialog');
-  dialog.className = 'mobile-page-dialog';
-  dialog.setAttribute('aria-labelledby', 'mobile-menu-title');
-  dialog.innerHTML = `
+  const dialogEl = document.createElement('dialog');
+  dialogEl.className = 'mobile-page-dialog';
+  dialogEl.setAttribute('aria-labelledby', 'mobile-menu-title');
+  dialogEl.innerHTML = `
     <div class="mobile-menu-header">
       <h2 id="mobile-menu-title">Browse</h2>
       <button class="dialog-close" type="button" aria-label="Close menu">×</button>
@@ -75,7 +75,7 @@ function createSidebar(routes) {
    * @returns {void}
    */
   function setActive(pageId) {
-    [sidebar, dialog].forEach((navigation) => {
+    [sidebarEl, dialogEl].forEach((navigation) => {
       navigation.querySelectorAll('[data-page-id]').forEach((link) => {
         const active = link.dataset.pageId === pageId;
         link.classList.toggle('active', active);
@@ -92,7 +92,7 @@ function createSidebar(routes) {
    * @returns {void}
    */
   function onCloseClick() {
-    dialog.close();
+    dialogEl.close();
   }
 
   /**
@@ -100,19 +100,19 @@ function createSidebar(routes) {
    * @returns {void}
    */
   function onDialogClick(event) {
-    if (event.target === dialog) dialog.close();
-    if (event.target.closest('[data-page-id]')) dialog.close();
+    if (event.target === dialogEl) dialogEl.close();
+    if (event.target.closest('[data-page-id]')) dialogEl.close();
   }
 
-  const closeButton = dialog.querySelector('.dialog-close');
-  closeButton.addEventListener('click', onCloseClick);
-  dialog.addEventListener('click', onDialogClick);
+  const closeButtonEl = dialogEl.querySelector('.dialog-close');
+  closeButtonEl.addEventListener('click', onCloseClick);
+  dialogEl.addEventListener('click', onDialogClick);
 
   return {
-    element: sidebar,
-    dialog,
+    element: sidebarEl,
+    dialog: dialogEl,
     setActive,
-    openMenu: () => dialog.showModal(),
+    openMenu: () => dialogEl.showModal(),
   };
 }
 export { createSidebar };

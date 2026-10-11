@@ -7,9 +7,9 @@ describe('renderLikeButton', () => {
 
   beforeEach(() => {
     vi.useFakeTimers();
-    const container = document.createElement('div');
-    renderLikeButton(container);
-    likeButton = container.querySelector('#likeButton');
+    const containerEl = document.createElement('div');
+    renderLikeButton(containerEl);
+    likeButton = containerEl.querySelector('#likeButton');
   });
 
   afterEach(() => {

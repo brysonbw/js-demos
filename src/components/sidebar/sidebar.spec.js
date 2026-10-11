@@ -20,12 +20,12 @@ describe('createSidebar', () => {
   });
 
   it('renders a numbered link for each route', () => {
-    const links = sidebar.element.querySelectorAll('.sidebar-link');
+    const linkEls = sidebar.element.querySelectorAll('.sidebar-link');
     // 1 home link + 2 route links
-    expect(links).toHaveLength(3);
-    expect(links[1]).toHaveAttribute('href', '#/contact');
-    expect(links[1].textContent).toContain('Contact form');
-    expect(links[1].querySelector('span').textContent).toBe('01');
+    expect(linkEls).toHaveLength(3);
+    expect(linkEls[1]).toHaveAttribute('href', '#/contact');
+    expect(linkEls[1].textContent).toContain('Contact form');
+    expect(linkEls[1].querySelector('span').textContent).toBe('01');
   });
 
   it('orders links by the demo list order regardless of routes order', () => {
@@ -37,35 +37,35 @@ describe('createSidebar', () => {
   });
 
   it('links home to the home hash', () => {
-    const homeLink = sidebar.element.querySelector(
+    const homeLinkEl = sidebar.element.querySelector(
       `[data-page-id="${ROUTES.HOME.route}"]`
     );
-    expect(homeLink).toHaveAttribute('href', ROUTES.HOME.hash);
+    expect(homeLinkEl).toHaveAttribute('href', ROUTES.HOME.hash);
   });
 
   it('marks the active page in both sidebar and dialog', () => {
     sidebar.setActive('tabs');
 
     [sidebar.element, sidebar.dialog].forEach((root) => {
-      const active = root.querySelector('[data-page-id="tabs"]');
-      expect(active).toHaveClass('active');
-      expect(active).toHaveAttribute('aria-current', 'page');
+      const activeEl = root.querySelector('[data-page-id="tabs"]');
+      expect(activeEl).toHaveClass('active');
+      expect(activeEl).toHaveAttribute('aria-current', 'page');
 
-      const inactive = root.querySelector('[data-page-id="contact"]');
-      expect(inactive).not.toHaveClass('active');
-      expect(inactive).not.toHaveAttribute('aria-current');
+      const inactiveEl = root.querySelector('[data-page-id="contact"]');
+      expect(inactiveEl).not.toHaveClass('active');
+      expect(inactiveEl).not.toHaveAttribute('aria-current');
     });
   });
 
   it('shows the current year in the footer', () => {
-    const footer = sidebar.element.querySelector('.sidebar-footer');
-    expect(footer.textContent).toContain(String(new Date().getFullYear()));
+    const footerEl = sidebar.element.querySelector('.sidebar-footer');
+    expect(footerEl.textContent).toContain(String(new Date().getFullYear()));
   });
 
   it('renders the same links inside the mobile dialog', () => {
-    const dialogLinks = sidebar.dialog.querySelectorAll('.sidebar-link');
-    expect(dialogLinks).toHaveLength(3);
-    expect(dialogLinks[2].textContent).toContain('Tabs');
+    const dialogLinkEls = sidebar.dialog.querySelectorAll('.sidebar-link');
+    expect(dialogLinkEls).toHaveLength(3);
+    expect(dialogLinkEls[2].textContent).toContain('Tabs');
   });
 
   it('opens the dialog with openMenu', () => {
@@ -92,9 +92,9 @@ describe('createSidebar', () => {
     sidebar.setActive('tabs');
     sidebar.setActive('contact');
 
-    const previous = sidebar.element.querySelector('[data-page-id="tabs"]');
-    expect(previous).not.toHaveClass('active');
-    expect(previous).not.toHaveAttribute('aria-current');
+    const previousEl = sidebar.element.querySelector('[data-page-id="tabs"]');
+    expect(previousEl).not.toHaveClass('active');
+    expect(previousEl).not.toHaveAttribute('aria-current');
   });
 
   it('numbers links by their position in the demo list order', () => {

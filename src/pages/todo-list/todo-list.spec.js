@@ -10,41 +10,53 @@ function submitTodo(container, text) {
 }
 
 describe('renderTodoList', () => {
-  let container;
+  let containerEl;
 
   beforeEach(() => {
-    container = document.createElement('div');
-    renderTodoList(container);
+    containerEl = document.createElement('div');
+    renderTodoList(containerEl);
   });
 
   it('renders three seed todos', () => {
-    expect(container.querySelectorAll('#todoList li')).toHaveLength(3);
+    expect(containerEl.querySelectorAll('#todoList li')).toHaveLength(3);
   });
 
   it('adds a todo on submit', () => {
-    submitTodo(container, 'Buy milk');
+    submitTodo(containerEl, 'Buy milk');
 
-    const items = container.querySelectorAll('#todoList li');
-    expect(items).toHaveLength(4);
-    expect(items[3].textContent).toContain('Buy milk');
+    const itemEls = containerEl.querySelectorAll('#todoList li');
+    expect(itemEls).toHaveLength(4);
+    expect(itemEls[3].textContent).toContain('Buy milk');
+  });
+
+  it('renders todo text as plain text instead of HTML', () => {
+    submitTodo(containerEl, '<img src=x onerror="alert(1)">');
+
+    const itemEls = containerEl.querySelectorAll('#todoList li');
+    expect(itemEls[3].querySelector('img')).toBeNull();
+    expect(itemEls[3].querySelector('span').textContent).toBe(
+      '<img src=x onerror="alert(1)">'
+    );
   });
 
   it('clears the input after adding a todo', () => {
-    submitTodo(container, 'Buy milk');
-    expect(container.querySelector('#todo-input').value).toBe('');
+    submitTodo(containerEl, 'Buy milk');
+    expect(containerEl.querySelector('#todo-input').value).toBe('');
   });
 
   it('does not add an empty todo', () => {
-    submitTodo(container, '   ');
-    expect(container.querySelectorAll('#todoList li')).toHaveLength(3);
+    submitTodo(containerEl, '   ');
+    expect(containerEl.querySelectorAll('#todoList li')).toHaveLength(3);
   });
 
   it('deletes a todo when its delete button is clicked', () => {
-    const firstDeleteButton = container.querySelector('#todoList li button');
-    firstDeleteButton.click();
+    const firstDeleteButtonEl = containerEl.querySelector(
+      '#todoList li button'
+    );
+    firstDeleteButtonEl.click();
 
-    const items = container.querySelectorAll('#todoList li');
-    expect(items).toHaveLength(2);
-    expect(container.textContent).not.toContain('Walk the dog');
+    const itemEls = containerEl.querySelectorAll('#todoList li');
+    expect(itemEls).toHaveLength(2);
+    expect(containerEl.textContent).not.toContain('Walk the dog');
   });
 });

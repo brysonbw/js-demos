@@ -15,21 +15,21 @@ function renderLikeButton(container) {
       <span>Like</span>
     </button>
   `;
-  const likeButton = container.querySelector('#likeButton');
-  const label = likeButton.querySelector('span');
+  const likeButtonEl = container.querySelector('#likeButton');
+  const labelEl = likeButtonEl.querySelector('span');
 
   let isLiked = false;
 
-  likeButton.addEventListener('click', onLikeButtonClick);
+  likeButtonEl.addEventListener('click', onLikeButtonClick);
 
   /** @returns {void} */
   async function onLikeButtonClick() {
-    likeButton.disabled = true;
-    label.textContent = 'Loading...';
+    likeButtonEl.disabled = true;
+    labelEl.textContent = 'Loading...';
     isLiked = await toggleLikeButtonState(!isLiked);
-    likeButton.setAttribute('aria-pressed', String(isLiked));
-    label.textContent = isLiked ? 'Liked' : 'Like';
-    likeButton.disabled = false;
+    likeButtonEl.setAttribute('aria-pressed', String(isLiked));
+    labelEl.textContent = isLiked ? 'Liked' : 'Like';
+    likeButtonEl.disabled = false;
   }
 
   /**
