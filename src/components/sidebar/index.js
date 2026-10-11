@@ -54,7 +54,7 @@ function createSidebar(routes) {
     <nav class="sidebar-navigation" aria-label="Page navigation">
       ${sectionLinks(routes)}
     </nav>
-    <div class="sidebar-footer"><span class="status-dot"></span> @${getCurrentYear()} ${APP_NAME}</div>
+    <div class="sidebar-footer">@${getCurrentYear()} <a class="sidebar-footer-link" href="${ROUTES.HOME.hash}">${APP_NAME}</a>  <span>v${__APP_VERSION__}</span></div>
   `;
 
   const dialogEl = document.createElement('dialog');

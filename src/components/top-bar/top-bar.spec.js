@@ -16,6 +16,13 @@ describe('createTopbar', () => {
     expect(themeButton).toBeInstanceOf(HTMLButtonElement);
   });
 
+  it('renders the GitHub icon link', () => {
+    const { element } = createTopbar();
+    const link = element.querySelector('.github-link');
+    expect(link).toHaveAttribute('aria-label', 'GitHub repository');
+    expect(link.querySelector('img')).not.toBeNull();
+  });
+
   it('renders the theme toggle with an accessible label', () => {
     const { themeButton } = createTopbar();
     expect(themeButton).toHaveAttribute('aria-label', 'Switch color mode');

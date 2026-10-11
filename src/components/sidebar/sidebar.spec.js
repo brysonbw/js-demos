@@ -62,6 +62,16 @@ describe('createSidebar', () => {
     expect(footerEl.textContent).toContain(String(new Date().getFullYear()));
   });
 
+  it('links the footer app name to the home page', () => {
+    const linkEl = sidebar.element.querySelector('.sidebar-footer-link');
+    expect(linkEl).toHaveAttribute('href', ROUTES.HOME.hash);
+  });
+
+  it('shows the app version in the footer', () => {
+    const footerEl = sidebar.element.querySelector('.sidebar-footer');
+    expect(footerEl.textContent).toContain(`v${__APP_VERSION__}`);
+  });
+
   it('renders the same links inside the mobile dialog', () => {
     const dialogLinkEls = sidebar.dialog.querySelectorAll('.sidebar-link');
     expect(dialogLinkEls).toHaveLength(3);

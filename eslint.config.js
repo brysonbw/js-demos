@@ -21,6 +21,7 @@ export default [
       sourceType: 'module',
       globals: {
         process: 'readonly',
+        __APP_VERSION__: 'readonly',
         ...globals.browser,
       },
     },

@@ -1,10 +1,14 @@
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   height: 68px;
   padding: 0 2.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
+  border-bottom: 1px solid #5454547a;
   background: #1d1e25;
   color: #f4f4f7;
 }
@@ -48,22 +52,65 @@
   color: #fff;
 }
 
-.theme-toggle,
-.mobile-menu-button {
-  width: 38px;
-  height: 38px;
+.github-link {
+  height: 34px;
+  padding: 0 0.875rem 0 0.625rem;
+  box-sizing: border-box;
+  gap: 0.5rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #494a56;
   border-radius: 0.375rem;
   background: transparent;
-  color: #f4f4f7;
+  color: #ffc0a8;
+  text-decoration: none;
+  transition: background 160ms ease;
+}
+
+.github-link span {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.github-link:hover {
+  background: #33343f;
+}
+
+.github-link:focus-visible {
+  outline: 3px solid #ff9072;
+  outline-offset: 2px;
+}
+
+.github-link img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 160ms ease;
+}
+
+.github-link:hover img {
+  opacity: 1;
+}
+
+.theme-toggle,
+.mobile-menu-button {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #494a56;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: #ffc0a8;
   cursor: pointer;
 }
 
 .theme-toggle {
-  font-size: 1.3125rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
@@ -112,14 +159,20 @@
   .mobile-menu-button {
     display: inline-flex;
   }
+
+  .github-link {
+    width: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .github-link span {
+    display: none;
+  }
 }
 
 @media (max-width: 520px) {
   .brand {
     font-size: 1.1875rem;
-  }
-
-  .top-nav {
-    display: none;
   }
 }
