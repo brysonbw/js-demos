@@ -24,7 +24,7 @@ describe('createPageHeading', () => {
   it('builds the heading from the ROUTES entry and demo number', () => {
     const header = createPageHeading(ROUTES.TODO_LIST.route);
     expect(header).toHaveClass('page-heading');
-    expect(header.querySelector('.eyebrow').textContent).toBe('Page 02');
+    expect(header.querySelector('.eyebrow').textContent).toBe('Demo 02');
     expect(header.querySelector('#page-title').textContent).toBe(
       ROUTES.TODO_LIST.title
     );

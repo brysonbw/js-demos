@@ -69,6 +69,13 @@ const ROUTES = Object.freeze({
       'Interact with a like button component that toggles its state when clicked.',
     hash: '#/like-button',
   }),
+  MODAL: Object.freeze({
+    route: 'modal',
+    title: 'Modal',
+    description:
+      'Open a modal dialog from any of three buttons to display post content fetched from an external API.',
+    hash: '#/modal',
+  }),
 });
 
 // Ordered list of demo pages - position determines the demo number display/text
@@ -80,6 +87,7 @@ const DEMO_LIST_ORDER = Object.freeze([
   ROUTES.PRODUCTS_LIST,
   ROUTES.IMAGE_CAROUSEL,
   ROUTES.LIKE_BUTTON,
+  ROUTES.MODAL,
 ]);
 
 export {

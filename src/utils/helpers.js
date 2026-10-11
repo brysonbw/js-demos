@@ -43,22 +43,22 @@ function stripModuleSyntax(source) {
  */
 function createPageHeading(route, overrides = {}) {
   const entry = Object.values(ROUTES).find((item) => item.route === route);
-  const header = document.createElement('header');
-  header.className = 'page-heading';
+  const headerEl = document.createElement('header');
+  headerEl.className = 'page-heading';
 
-  const eyebrow = document.createElement('p');
-  eyebrow.className = 'eyebrow';
-  eyebrow.textContent = overrides.eyebrow ?? `Page ${getDemoNumber(route)}`;
+  const eyebrowEl = document.createElement('p');
+  eyebrowEl.className = 'eyebrow';
+  eyebrowEl.textContent = overrides.eyebrow ?? `Demo ${getDemoNumber(route)}`;
 
-  const title = document.createElement('h1');
-  title.id = 'page-title';
-  title.textContent = overrides.title ?? entry.title;
+  const titleEl = document.createElement('h1');
+  titleEl.id = 'page-title';
+  titleEl.textContent = overrides.title ?? entry.title;
 
-  const description = document.createElement('p');
-  description.textContent = entry.description;
+  const descriptionEl = document.createElement('p');
+  descriptionEl.textContent = entry.description;
 
-  header.append(eyebrow, title, description);
-  return header;
+  headerEl.append(eyebrowEl, titleEl, descriptionEl);
+  return headerEl;
 }
 
 export { createPageHeading, getDemoNumber, padIndex, stripModuleSyntax };

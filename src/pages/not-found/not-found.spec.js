@@ -5,10 +5,10 @@ import { renderNotFound } from './index.js';
 
 describe('renderNotFound', () => {
   it('links back to the home route', () => {
-    const container = document.createElement('div');
-    renderNotFound(container);
+    const containerEl = document.createElement('div');
+    renderNotFound(containerEl);
 
-    const homeLink = container.querySelector('a.button');
-    expect(homeLink).toHaveAttribute('href', ROUTES.HOME.hash);
+    const homeLinkEl = containerEl.querySelector('a.button');
+    expect(homeLinkEl).toHaveAttribute('href', ROUTES.HOME.hash);
   });
 });

@@ -31,10 +31,10 @@ function renderTodoList(container) {
 
   const inputEl = container.querySelector('#todo-input');
   const todoListEl = container.querySelector('#todoList');
-  const todoForm = container.querySelector('#todo-form');
+  const todoFormEl = container.querySelector('#todo-form');
 
   todoListEl.addEventListener('click', onTodoClick);
-  todoForm.addEventListener('submit', addTodo);
+  todoFormEl.addEventListener('submit', addTodo);
 
   /** @param {MouseEvent} event */
   function onTodoClick(event) {
@@ -57,12 +57,12 @@ function renderTodoList(container) {
     event.preventDefault();
     const todoText = inputEl.value.trim();
     if (todoText) {
-      const li = document.createElement('li');
-      li.innerHTML = `
+      const liEl = document.createElement('li');
+      liEl.innerHTML = `
           <span>${todoText}</span>
           <button class="button" type="button">Delete</button>
         `;
-      todoListEl.appendChild(li);
+      todoListEl.appendChild(liEl);
       inputEl.value = '';
       inputEl.focus();
     }

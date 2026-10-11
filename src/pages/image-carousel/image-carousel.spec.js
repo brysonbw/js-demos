@@ -3,19 +3,19 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { renderImageCarousel } from './index.js';
 
 describe('renderImageCarousel', () => {
-  let container;
+  let containerEl;
 
-  const images = () => container.querySelectorAll('.carousel-image');
-  const dots = () => container.querySelectorAll('.dot-btn');
+  const imageEls = () => containerEl.querySelectorAll('.carousel-image');
+  const dotEls = () => containerEl.querySelectorAll('.dot-btn');
 
   beforeEach(() => {
-    container = document.createElement('div');
-    renderImageCarousel(container);
+    containerEl = document.createElement('div');
+    renderImageCarousel(containerEl);
   });
 
   it('renders the images with descriptive alt text and selects the first by default', () => {
-    expect(images()).toHaveLength(6);
-    expect([...images()].map((image) => image.alt)).toEqual([
+    expect(imageEls()).toHaveLength(6);
+    expect([...imageEls()].map((image) => image.alt)).toEqual([
       'Forest',
       'Beach',
       'Yak',
@@ -23,7 +23,7 @@ describe('renderImageCarousel', () => {
       'Plants',
       'Building',
     ]);
-    expect([...images()].map((image) => image.hidden)).toEqual([
+    expect([...imageEls()].map((image) => image.hidden)).toEqual([
       false,
       true,
       true,
@@ -34,8 +34,8 @@ describe('renderImageCarousel', () => {
   });
 
   it('renders accessible numbered image selectors', () => {
-    expect(dots()).toHaveLength(6);
-    expect([...dots()].map((dot) => dot.textContent)).toEqual([
+    expect(dotEls()).toHaveLength(6);
+    expect([...dotEls()].map((dot) => dot.textContent)).toEqual([
       '01',
       '02',
       '03',
@@ -43,7 +43,7 @@ describe('renderImageCarousel', () => {
       '05',
       '06',
     ]);
-    expect([...dots()].map((dot) => dot.getAttribute('aria-label'))).toEqual([
+    expect([...dotEls()].map((dot) => dot.getAttribute('aria-label'))).toEqual([
       'Show Forest',
       'Show Beach',
       'Show Yak',
@@ -51,43 +51,43 @@ describe('renderImageCarousel', () => {
       'Show Plants',
       'Show Building',
     ]);
-    expect(dots()[0]).toHaveAttribute('aria-current', 'true');
-    expect(dots()[0]).toHaveClass('active');
+    expect(dotEls()[0]).toHaveAttribute('aria-current', 'true');
+    expect(dotEls()[0]).toHaveClass('active');
   });
 
   it('moves to the next image and wraps from last to first', () => {
-    container.querySelector('.next-btn').click();
-    expect(images()[0].hidden).toBe(true);
-    expect(images()[1].hidden).toBe(false);
-    expect(dots()[1]).toHaveAttribute('aria-current', 'true');
-    expect(dots()[1]).toHaveClass('active');
+    containerEl.querySelector('.next-btn').click();
+    expect(imageEls()[0].hidden).toBe(true);
+    expect(imageEls()[1].hidden).toBe(false);
+    expect(dotEls()[1]).toHaveAttribute('aria-current', 'true');
+    expect(dotEls()[1]).toHaveClass('active');
 
-    for (let index = 1; index < images().length; index += 1) {
-      container.querySelector('.next-btn').click();
+    for (let index = 1; index < imageEls().length; index += 1) {
+      containerEl.querySelector('.next-btn').click();
     }
 
-    expect(images()[0].hidden).toBe(false);
-    expect(images()[5].hidden).toBe(true);
-    expect(dots()[0]).toHaveAttribute('aria-current', 'true');
+    expect(imageEls()[0].hidden).toBe(false);
+    expect(imageEls()[5].hidden).toBe(true);
+    expect(dotEls()[0]).toHaveAttribute('aria-current', 'true');
   });
 
   it('moves to the previous image and wraps from first to last', () => {
-    container.querySelector('.prev-btn').click();
+    containerEl.querySelector('.prev-btn').click();
 
-    expect(images()[0].hidden).toBe(true);
-    expect(images()[5].hidden).toBe(false);
-    expect(dots()[5]).toHaveAttribute('aria-current', 'true');
-    expect(dots()[5]).toHaveClass('active');
+    expect(imageEls()[0].hidden).toBe(true);
+    expect(imageEls()[5].hidden).toBe(false);
+    expect(dotEls()[5]).toHaveAttribute('aria-current', 'true');
+    expect(dotEls()[5]).toHaveClass('active');
   });
 
   it('selects an image when its numbered chip is clicked', () => {
-    dots()[3].click();
+    dotEls()[3].click();
 
-    expect(images()[3].hidden).toBe(false);
-    expect(images()[0].hidden).toBe(true);
-    expect(dots()[3]).toHaveAttribute('aria-current', 'true');
-    expect(dots()[3]).toHaveClass('active');
-    expect(dots()[0]).toHaveAttribute('aria-current', 'false');
-    expect(dots()[0]).not.toHaveClass('active');
+    expect(imageEls()[3].hidden).toBe(false);
+    expect(imageEls()[0].hidden).toBe(true);
+    expect(dotEls()[3]).toHaveAttribute('aria-current', 'true');
+    expect(dotEls()[3]).toHaveClass('active');
+    expect(dotEls()[0]).toHaveAttribute('aria-current', 'false');
+    expect(dotEls()[0]).not.toHaveClass('active');
   });
 });

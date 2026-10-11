@@ -48,18 +48,18 @@ function renderAccordion(container) {
   if (accordionItemEls.length > 0) {
     for (const item of accordionItemEls) {
       if (item instanceof HTMLElement) {
-        const title = item.querySelector('.accordion-title');
-        const content = item.querySelector('.accordion-content');
+        const titleEl = item.querySelector('.accordion-title');
+        const contentEl = item.querySelector('.accordion-content');
 
-        content.setAttribute('aria-hidden', 'true');
+        contentEl.setAttribute('aria-hidden', 'true');
 
         // Add styles for title
-        title.style.cursor = 'pointer';
+        titleEl.style.cursor = 'pointer';
 
         // Add event listener for title toggle
-        title.addEventListener('click', function () {
-          const isExpanded = content.getAttribute('aria-hidden') === 'true';
-          content.setAttribute('aria-hidden', String(!isExpanded));
+        titleEl.addEventListener('click', function () {
+          const isExpanded = contentEl.getAttribute('aria-hidden') === 'true';
+          contentEl.setAttribute('aria-hidden', String(!isExpanded));
         });
       }
     }

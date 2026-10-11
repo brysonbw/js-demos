@@ -5,9 +5,9 @@ import './index.css';
  * @returns {{element: HTMLElement, menuButton: HTMLButtonElement, themeButton: HTMLButtonElement}}
  */
 function createTopbar() {
-  const topbar = document.createElement('header');
-  topbar.className = 'topbar';
-  topbar.innerHTML = `
+  const topbarEl = document.createElement('header');
+  topbarEl.className = 'topbar';
+  topbarEl.innerHTML = `
     <a class="brand" href="${ROUTES.HOME.hash}">JS <span>Demos</span></a>
     <div class="topbar-actions">
       <nav class="top-nav" aria-label="External links">
@@ -20,9 +20,9 @@ function createTopbar() {
     </div>
   `;
   return {
-    element: topbar,
-    menuButton: topbar.querySelector('.mobile-menu-button'),
-    themeButton: topbar.querySelector('.theme-toggle'),
+    element: topbarEl,
+    menuButton: topbarEl.querySelector('.mobile-menu-button'),
+    themeButton: topbarEl.querySelector('.theme-toggle'),
   };
 }
 export { createTopbar };
