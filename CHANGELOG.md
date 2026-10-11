@@ -1,5 +1,13 @@
 # js-demos
 
+## 0.2.0
+
+### Minor Changes
+
+- 53c9104: Add modal dialog demo/page.
+- e61c6b0: Add like button demo/page.
+- 58f4e54: Add image carousel demo/page.
+
 ## 0.1.0
 
 ### Minor Changes
