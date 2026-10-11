@@ -58,10 +58,13 @@ function renderTodoList(container) {
     const todoText = inputEl.value.trim();
     if (todoText) {
       const liEl = document.createElement('li');
-      liEl.innerHTML = `
-          <span>${todoText}</span>
-          <button class="button" type="button">Delete</button>
-        `;
+      const spanEl = document.createElement('span');
+      const deleteButtonEl = document.createElement('button');
+      spanEl.textContent = todoText;
+      deleteButtonEl.className = 'button';
+      deleteButtonEl.type = 'button';
+      deleteButtonEl.textContent = 'Delete';
+      liEl.append(spanEl, deleteButtonEl);
       todoListEl.appendChild(liEl);
       inputEl.value = '';
       inputEl.focus();

@@ -122,11 +122,11 @@ function renderContactForm(container) {
   function addContactRow(contact) {
     const contactsTableBodyEl = container.querySelector('#contacts tbody');
     const rowEl = document.createElement('tr');
-    rowEl.innerHTML = `
-      <td>${contact.name}</td>
-      <td>${contact.mobileNumber}</td>
-      <td>${contact.email}</td>
-    `;
+    for (const value of [contact.name, contact.mobileNumber, contact.email]) {
+      const cellEl = document.createElement('td');
+      cellEl.textContent = value;
+      rowEl.appendChild(cellEl);
+    }
     contactsTableBodyEl.appendChild(rowEl);
   }
 }

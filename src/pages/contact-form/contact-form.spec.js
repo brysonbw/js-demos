@@ -36,6 +36,21 @@ describe('renderContactForm', () => {
     expect(rowEls[1].textContent).toContain('Jane Doe');
   });
 
+  it('rejects HTML in the name and does not add a row', () => {
+    fillForm(containerEl, {
+      name: '<img src=x onerror="alert(1)">',
+      mobileNumber: '1234567890',
+      email: 'jane.doe@example.com',
+    });
+
+    expect(containerEl.querySelector('#notification')).toHaveAttribute(
+      'data-notification-type',
+      'error'
+    );
+    expect(containerEl.querySelectorAll('#contacts tbody tr')).toHaveLength(1);
+    expect(containerEl.querySelector('#contacts img')).toBeNull();
+  });
+
   it('shows a success notification on valid submission', () => {
     fillForm(containerEl, {
       name: 'Jane Doe',
