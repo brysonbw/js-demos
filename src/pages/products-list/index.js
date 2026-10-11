@@ -1,4 +1,4 @@
-const products = [
+const PRODUCTS = [
   { name: 'Product 1', id: 1, price: 100 },
   { name: 'Product 2', id: 2, price: 200 },
   { name: 'Product 3', id: 3, price: 300 },
@@ -62,7 +62,7 @@ function renderProductsList(container) {
 
   /** @returns {void} */
   function renderRows() {
-    const initialProducts = products.slice(0, productsCount);
+    const initialProducts = PRODUCTS.slice(0, productsCount);
 
     tableBodyEl.innerHTML = initialProducts
       .map((product) => {
@@ -90,10 +90,10 @@ function renderProductsList(container) {
       })
       .join('');
 
-    productsCountDisplayEl.textContent = `Showing ${initialProducts.length} of ${products.length} products`;
+    productsCountDisplayEl.textContent = `Showing ${initialProducts.length} of ${PRODUCTS.length} products`;
 
     // Hide button if all products are displayed
-    if (productsCount >= products.length) {
+    if (productsCount >= PRODUCTS.length) {
       loadMoreButtonEl.style.display = 'none';
     }
   }
@@ -115,7 +115,7 @@ function renderProductsList(container) {
   });
 
   loadMoreButtonEl.addEventListener('click', function () {
-    productsCount = Math.min(productsCount + 5, products.length);
+    productsCount = Math.min(productsCount + 5, PRODUCTS.length);
     renderRows();
   });
 

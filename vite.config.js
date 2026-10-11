@@ -3,11 +3,18 @@ import { defineConfig, loadEnv } from 'vite';
 import { configDefaults } from 'vitest/config';
 import eslint from 'vite-plugin-eslint';
 
+const { version } = JSON.parse(
+  fs.readFileSync(new URL('./package.json', import.meta.url), 'utf-8')
+);
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const isDevHTTPSEnabled =
     typeof env.HTTPS_CERT === 'string' && typeof env.HTTPS_KEY === 'string';
   return {
+    define: {
+      __APP_VERSION__: JSON.stringify(version),
+    },
     base: mode === 'production' ? '/js-demos/' : '/',
     server: isDevHTTPSEnabled
       ? {
