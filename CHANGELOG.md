@@ -1,5 +1,15 @@
 # js-demos
 
+## 0.3.0
+
+### Minor Changes
+
+- 5156721: Add progress bars demo/page.
+
+### Patch Changes
+
+- 1b781da: Refactor the topbar and sidebar footer: the GitHub link is now a "Contribute" button with the GitHub icon, the topbar is sticky with a bottom border, and the app version shows in the sidebar footer next to a home-linked app name.
+
 ## 0.2.0
 
 ### Minor Changes
