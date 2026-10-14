@@ -1,5 +1,9 @@
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'JS Demos';
 
+const PROGRESS_BARS_DURATION_MS = 2000;
+
+const PROGRESS_BARS_MAX_IN_PROGRESS = 10;
+
 const GITHUB_REPO_URL = 'https://github.com/brysonbw/js-demos';
 
 const STORAGE_KEY_NAMESPACE = APP_NAME.toLowerCase().replace(/\s+/g, '-');
@@ -76,6 +80,12 @@ const ROUTES = Object.freeze({
       'Open a modal dialog from any of three buttons to display post content fetched from an external API.',
     hash: '#/modal',
   }),
+  PROGRESS_BARS: Object.freeze({
+    route: 'progress-bars',
+    title: 'Progress Bars',
+    description: `Add progress bars dynamically after clicking the button. Progress bar disappears after ${PROGRESS_BARS_DURATION_MS}ms`,
+    hash: '#/progress-bars',
+  }),
 });
 
 // Ordered list of demo pages - position determines the demo number display/text
@@ -88,6 +98,7 @@ const DEMO_LIST_ORDER = Object.freeze([
   ROUTES.IMAGE_CAROUSEL,
   ROUTES.LIKE_BUTTON,
   ROUTES.MODAL,
+  ROUTES.PROGRESS_BARS,
 ]);
 
 export {
@@ -97,4 +108,6 @@ export {
   STORAGE_KEYS,
   STORAGE_KEY_NAMESPACE,
   GITHUB_REPO_URL,
+  PROGRESS_BARS_DURATION_MS,
+  PROGRESS_BARS_MAX_IN_PROGRESS,
 };
