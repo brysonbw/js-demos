@@ -138,6 +138,20 @@ export const routes = [
         (module) => module.renderModal
       ),
   },
+  {
+    route: ROUTES.PROGRESS_BARS.route,
+    title: ROUTES.PROGRESS_BARS.title,
+    render: () =>
+      renderPage(
+        import('./pages/progress-bars/index.js'),
+        import('./pages/progress-bars/index.js?raw'),
+        [
+          import('./pages/progress-bars/index.css?raw'),
+          import('./shared/styles/button.css?raw'),
+        ],
+        (module) => module.renderProgressBars
+      ),
+  },
 ];
 
 export const pageRenderers = new Map([
