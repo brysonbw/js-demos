@@ -152,6 +152,17 @@ export const routes = [
         (module) => module.renderProgressBars
       ),
   },
+  {
+    route: ROUTES.STAR_RATING.route,
+    title: ROUTES.STAR_RATING.title,
+    render: () =>
+      renderPage(
+        import('./pages/star-rating/index.js'),
+        import('./pages/star-rating/index.js?raw'),
+        [import('./pages/star-rating/index.css?raw')],
+        (module) => module.renderStarRating
+      ),
+  },
 ];
 
 export const pageRenderers = new Map([
