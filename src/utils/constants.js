@@ -7,7 +7,6 @@ const PROGRESS_BARS_MAX_IN_PROGRESS = 10;
 const GITHUB_REPO_URL = 'https://github.com/brysonbw/js-demos';
 
 const STORAGE_KEY_NAMESPACE = APP_NAME.toLowerCase().replace(/\s+/g, '-');
-
 const STORAGE_KEYS = Object.freeze({
   THEME: `${STORAGE_KEY_NAMESPACE}-theme`,
 });
@@ -83,8 +82,14 @@ const ROUTES = Object.freeze({
   PROGRESS_BARS: Object.freeze({
     route: 'progress-bars',
     title: 'Progress Bars',
-    description: `Add progress bars dynamically after clicking the button. Progress bar disappears after ${PROGRESS_BARS_DURATION_MS}ms`,
+    description: `Add progress bars dynamically after clicking the button. Progress bar disappears after ${PROGRESS_BARS_DURATION_MS}ms.`,
     hash: '#/progress-bars',
+  }),
+  STAR_RATING: Object.freeze({
+    route: 'star-rating',
+    title: 'Star Rating',
+    description: 'Select a rating by clicking on the stars.',
+    hash: '#/star-rating',
   }),
 });
 
@@ -99,6 +104,7 @@ const DEMO_LIST_ORDER = Object.freeze([
   ROUTES.LIKE_BUTTON,
   ROUTES.MODAL,
   ROUTES.PROGRESS_BARS,
+  ROUTES.STAR_RATING,
 ]);
 
 export {
