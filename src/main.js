@@ -159,6 +159,7 @@ async function renderCurrentRoute() {
     activateTab(tabEls[0]);
     const mountPage = await pageRenderers.get(pageId)();
     if (currentRenderRequest !== renderRequestId) return;
+    pageViewEl.replaceChildren();
     mountPage(pageViewEl);
     // Prepend the page heading to the page view
     const headingOverrides = new Map([
@@ -190,6 +191,7 @@ async function renderCurrentRoute() {
     loadedPage.css,
     'css'
   );
+  pageViewEl.replaceChildren();
   loadedPage.render(pageViewEl);
   pageViewEl.prepend(createPageHeading(page.route));
 }

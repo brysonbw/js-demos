@@ -91,6 +91,13 @@ const ROUTES = Object.freeze({
     description: 'Select a rating by clicking on the stars.',
     hash: '#/star-rating',
   }),
+  DATA_TABLE: Object.freeze({
+    route: 'data-table',
+    title: 'Data Table',
+    description:
+      'View a user data table that displays users in a paginated format.',
+    hash: '#/data-table',
+  }),
 });
 
 // Ordered list of demo pages - position determines the demo number display/text
@@ -105,6 +112,7 @@ const DEMO_LIST_ORDER = Object.freeze([
   ROUTES.MODAL,
   ROUTES.PROGRESS_BARS,
   ROUTES.STAR_RATING,
+  ROUTES.DATA_TABLE,
 ]);
 
 export {

@@ -1,0 +1,8 @@
+.pagination {
+  display: flex;
+  gap: 1rem;
+}
+
+.pagination > button {
+  flex: 1;
+}
