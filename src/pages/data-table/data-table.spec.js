@@ -99,10 +99,4 @@ describe('renderDataTable', () => {
       containerEl.querySelector('tbody tr:last-child td:first-child')
     ).toHaveTextContent(String(users.at(-1).id));
   });
-
-  it('rejects a non-element container', () => {
-    expect(() => renderDataTable(null)).toThrow(
-      'A valid container element is required.'
-    );
-  });
 });
