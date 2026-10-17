@@ -1,35 +1,4 @@
-const PRODUCTS = [
-  { name: 'Product 1', id: 1, price: 100 },
-  { name: 'Product 2', id: 2, price: 200 },
-  { name: 'Product 3', id: 3, price: 300 },
-  { name: 'Product 4', id: 4, price: 400 },
-  { name: 'Product 5', id: 5, price: 500 },
-  { name: 'Product 6', id: 6, price: 600 },
-  { name: 'Product 7', id: 7, price: 700 },
-  { name: 'Product 8', id: 8, price: 800 },
-  { name: 'Product 9', id: 9, price: 900 },
-  { name: 'Product 10', id: 10, price: 1000 },
-  { name: 'Product 11', id: 11, price: 1100 },
-  { name: 'Product 12', id: 12, price: 1200 },
-  { name: 'Product 13', id: 13, price: 1300 },
-  { name: 'Product 14', id: 14, price: 1400 },
-  { name: 'Product 15', id: 15, price: 1500 },
-  { name: 'Product 16', id: 16, price: 1600 },
-  { name: 'Product 17', id: 17, price: 1700 },
-  { name: 'Product 18', id: 18, price: 1800 },
-  { name: 'Product 19', id: 19, price: 1900 },
-  { name: 'Product 20', id: 20, price: 2000 },
-  { name: 'Product 21', id: 21, price: 2100 },
-  { name: 'Product 22', id: 22, price: 2200 },
-  { name: 'Product 23', id: 23, price: 2300 },
-  { name: 'Product 24', id: 24, price: 2400 },
-  { name: 'Product 25', id: 25, price: 2500 },
-  { name: 'Product 26', id: 26, price: 2600 },
-  { name: 'Product 27', id: 27, price: 2700 },
-  { name: 'Product 28', id: 28, price: 2800 },
-  { name: 'Product 29', id: 29, price: 2900 },
-  { name: 'Product 30', id: 30, price: 3000 },
-];
+import { products } from '../../data/products.js';
 
 /**
  * @param {HTMLElement} container
@@ -62,7 +31,7 @@ function renderProductsList(container) {
 
   /** @returns {void} */
   function renderRows() {
-    const initialProducts = PRODUCTS.slice(0, productsCount);
+    const initialProducts = products.slice(0, productsCount);
 
     tableBodyEl.innerHTML = initialProducts
       .map((product) => {
@@ -90,10 +59,10 @@ function renderProductsList(container) {
       })
       .join('');
 
-    productsCountDisplayEl.textContent = `Showing ${initialProducts.length} of ${PRODUCTS.length} products`;
+    productsCountDisplayEl.textContent = `Showing ${initialProducts.length} of ${products.length} products`;
 
     // Hide button if all products are displayed
-    if (productsCount >= PRODUCTS.length) {
+    if (productsCount >= products.length) {
       loadMoreButtonEl.style.display = 'none';
     }
   }
@@ -115,7 +84,7 @@ function renderProductsList(container) {
   });
 
   loadMoreButtonEl.addEventListener('click', function () {
-    productsCount = Math.min(productsCount + 5, PRODUCTS.length);
+    productsCount = Math.min(productsCount + 5, products.length);
     renderRows();
   });
 

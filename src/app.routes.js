@@ -163,6 +163,21 @@ export const routes = [
         (module) => module.renderStarRating
       ),
   },
+  {
+    route: ROUTES.DATA_TABLE.route,
+    title: ROUTES.DATA_TABLE.title,
+    render: () =>
+      renderPage(
+        import('./pages/data-table/index.js'),
+        import('./pages/data-table/index.js?raw'),
+        [
+          import('./pages/data-table/index.css?raw'),
+          import('./shared/styles/button.css?raw'),
+          import('./shared/styles/table.css?raw'),
+        ],
+        (module) => module.renderDataTable
+      ),
+  },
 ];
 
 export const pageRenderers = new Map([
