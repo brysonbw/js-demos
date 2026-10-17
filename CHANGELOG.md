@@ -1,5 +1,12 @@
 # js-demos
 
+## 0.4.0
+
+### Minor Changes
+
+- db11b02: Add data table demo/page.
+- fa9e853: Add star rating demo/page.
+
 ## 0.3.0
 
 ### Minor Changes
