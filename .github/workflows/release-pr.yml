@@ -34,7 +34,7 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         id: cpr
         with:
-          branch: release
+          branch: release/v${{ steps.package-version.outputs.current-version }}
           delete-branch: true
           commit-message: 'chore: release v${{ steps.package-version.outputs.current-version }}'
           title: 'chore: release v${{ steps.package-version.outputs.current-version }}'
