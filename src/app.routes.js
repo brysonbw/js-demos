@@ -178,6 +178,20 @@ export const routes = [
         (module) => module.renderDataTable
       ),
   },
+  {
+    route: ROUTES.STOPWATCH.route,
+    title: ROUTES.STOPWATCH.title,
+    render: () =>
+      renderPage(
+        import('./pages/stopwatch/index.js'),
+        import('./pages/stopwatch/index.js?raw'),
+        [
+          import('./pages/stopwatch/index.css?raw'),
+          import('./shared/styles/button.css?raw'),
+        ],
+        (module) => module.renderStopwatch
+      ),
+  },
 ];
 
 export const pageRenderers = new Map([
