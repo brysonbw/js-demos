@@ -98,6 +98,13 @@ const ROUTES = Object.freeze({
       'View a user data table that displays users in a paginated format.',
     hash: '#/data-table',
   }),
+  STOPWATCH: Object.freeze({
+    route: 'stopwatch',
+    title: 'Stopwatch',
+    description:
+      'A stopwatch to track elapsed time, with start, stop, and reset functionality.',
+    hash: '#/stopwatch',
+  }),
 });
 
 // Ordered list of demo pages - position determines the demo number display/text
