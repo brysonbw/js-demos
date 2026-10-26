@@ -40,6 +40,15 @@ export default [
       'no-restricted-syntax': [
         'error',
         {
+          selector: "IfStatement[consequent.type!='BlockStatement']",
+          message: 'Wrap the if statement body in a block.',
+        },
+        {
+          selector:
+            "IfStatement[alternate]:not([alternate.type='IfStatement']):not([alternate.type='BlockStatement'])",
+          message: 'Wrap the else statement body in a block.',
+        },
+        {
           selector:
             "CallExpression[callee.property.name='addEventListener'] > ArrowFunctionExpression",
           message:
