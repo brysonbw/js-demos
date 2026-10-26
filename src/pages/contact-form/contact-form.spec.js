@@ -7,7 +7,7 @@ function fillForm(container, { name, mobileNumber, email }) {
   container.querySelector('#mobileNumber').value = mobileNumber;
   container.querySelector('#email').value = email;
   container
-    .querySelector('#contact-form')
+    .querySelector('#contactForm')
     .dispatchEvent(new SubmitEvent('submit', { cancelable: true }));
 }
 
@@ -20,7 +20,7 @@ describe('renderContactForm', () => {
   });
 
   it('renders the form with one seed contact row', () => {
-    expect(containerEl.querySelector('#contact-form')).not.toBeNull();
+    expect(containerEl.querySelector('#contactForm')).not.toBeNull();
     expect(containerEl.querySelectorAll('#contacts tbody tr')).toHaveLength(1);
   });
 

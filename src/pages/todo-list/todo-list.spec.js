@@ -3,9 +3,9 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { renderTodoList } from './index.js';
 
 function submitTodo(container, text) {
-  container.querySelector('#todo-input').value = text;
+  container.querySelector('#todoInput').value = text;
   container
-    .querySelector('#todo-form')
+    .querySelector('#todoForm')
     .dispatchEvent(new SubmitEvent('submit', { cancelable: true }));
 }
 
@@ -41,7 +41,7 @@ describe('renderTodoList', () => {
 
   it('clears the input after adding a todo', () => {
     submitTodo(containerEl, 'Buy milk');
-    expect(containerEl.querySelector('#todo-input').value).toBe('');
+    expect(containerEl.querySelector('#todoInput').value).toBe('');
   });
 
   it('does not add an empty todo', () => {

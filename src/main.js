@@ -24,16 +24,16 @@ const mainContentEl = document.createElement('main');
 mainContentEl.className = 'main-content';
 mainContentEl.innerHTML = `
   <div class="page-tabs" role="tablist" aria-label="Page view">
-    <button class="page-tab active" id="tab-preview" type="button" role="tab" aria-selected="true" aria-controls="panel-preview" data-view="preview">Preview</button>
-    <button class="page-tab" id="tab-js" type="button" role="tab" aria-selected="false" aria-controls="panel-js" tabindex="-1" data-view="js">JS</button>
-    <button class="page-tab" id="tab-css" type="button" role="tab" aria-selected="false" aria-controls="panel-css" tabindex="-1" data-view="css">CSS</button>
+    <button class="page-tab active" id="tabPreview" type="button" role="tab" aria-selected="true" aria-controls="panelPreview" data-view="preview">Preview</button>
+    <button class="page-tab" id="tabJs" type="button" role="tab" aria-selected="false" aria-controls="panelJs" tabindex="-1" data-view="js">JS</button>
+    <button class="page-tab" id="tabCss" type="button" role="tab" aria-selected="false" aria-controls="panelCss" tabindex="-1" data-view="css">CSS</button>
   </div>
-  <section class="page-view" id="panel-preview" role="tabpanel" aria-labelledby="tab-preview" tabindex="0" aria-live="polite"></section>
-  <section class="source-panel" id="panel-js" role="tabpanel" aria-labelledby="tab-js" tabindex="0" hidden><pre><code></code></pre></section>
-  <section class="source-panel" id="panel-css" role="tabpanel" aria-labelledby="tab-css" tabindex="0" hidden><pre><code></code></pre></section>
+  <section class="page-view" id="panelPreview" role="tabpanel" aria-labelledby="tabPreview" tabindex="0" aria-live="polite"></section>
+  <section class="source-panel" id="panelJs" role="tabpanel" aria-labelledby="tabJs" tabindex="0" hidden><pre><code></code></pre></section>
+  <section class="source-panel" id="panelCss" role="tabpanel" aria-labelledby="tabCss" tabindex="0" hidden><pre><code></code></pre></section>
 `;
 
-const pageViewEl = mainContentEl.querySelector('#panel-preview');
+const pageViewEl = mainContentEl.querySelector('#panelPreview');
 const tabListEl = mainContentEl.querySelector('[role="tablist"]');
 let tabEls = Array.from(tabListEl.querySelectorAll('[role="tab"]'));
 const tabPanelEls = [...mainContentEl.querySelectorAll('[role="tabpanel"]')];
@@ -52,20 +52,32 @@ topbar.themeButton.addEventListener('click', toggleTheme);
 window.addEventListener('hashchange', renderCurrentRoute);
 tabListEl.addEventListener('click', function (event) {
   const tab = event.target.closest('[role="tab"]');
-  if (tab) activateTab(tab);
+  if (tab) {
+    activateTab(tab);
+  }
 });
 tabListEl.addEventListener('keydown', function (event) {
   const currentIndex = tabEls.indexOf(document.activeElement);
-  if (currentIndex < 0) return;
+  if (currentIndex < 0) {
+    return;
+  }
 
   let nextIndex;
-  if (event.key === 'ArrowRight')
+  if (event.key === 'ArrowRight') {
     nextIndex = (currentIndex + 1) % tabEls.length;
-  if (event.key === 'ArrowLeft')
+  }
+  if (event.key === 'ArrowLeft') {
     nextIndex = (currentIndex - 1 + tabEls.length) % tabEls.length;
-  if (event.key === 'Home') nextIndex = 0;
-  if (event.key === 'End') nextIndex = tabEls.length - 1;
-  if (nextIndex === undefined) return;
+  }
+  if (event.key === 'Home') {
+    nextIndex = 0;
+  }
+  if (event.key === 'End') {
+    nextIndex = tabEls.length - 1;
+  }
+  if (nextIndex === undefined) {
+    return;
+  }
 
   event.preventDefault();
   tabEls.at(nextIndex).focus();
@@ -74,10 +86,14 @@ tabListEl.addEventListener('keydown', function (event) {
 
 const themePreference = window.matchMedia('(prefers-color-scheme: dark)');
 let chosenTheme = localStorage.getItem(STORAGE_KEYS.THEME);
-if (chosenTheme !== 'light' && chosenTheme !== 'dark') chosenTheme = null;
+if (chosenTheme !== 'light' && chosenTheme !== 'dark') {
+  chosenTheme = null;
+}
 applyTheme(chosenTheme ?? (themePreference.matches ? 'dark' : 'light'));
 themePreference.addEventListener('change', function (event) {
-  if (!chosenTheme) applyTheme(event.matches ? 'dark' : 'light');
+  if (!chosenTheme) {
+    applyTheme(event.matches ? 'dark' : 'light');
+  }
 });
 
 /**
@@ -109,6 +125,7 @@ function toggleTheme() {
  */
 function activateTab(selectedTab) {
   const selectedView = selectedTab.dataset.view;
+  const selectedPanelId = `panel${selectedView.charAt(0).toUpperCase()}${selectedView.slice(1)}`;
   tabEls.forEach((tab) => {
     const active = tab === selectedTab;
     tab.classList.toggle('active', active);
@@ -116,7 +133,7 @@ function activateTab(selectedTab) {
     tab.tabIndex = active ? 0 : -1;
   });
   tabPanelEls.forEach((panel) => {
-    panel.hidden = panel.id !== `panel-${selectedView}`;
+    panel.hidden = panel.id !== selectedPanelId;
   });
 }
 
@@ -158,7 +175,9 @@ async function renderCurrentRoute() {
     tabListEl.hidden = true;
     activateTab(tabEls[0]);
     const mountPage = await pageRenderers.get(pageId)();
-    if (currentRenderRequest !== renderRequestId) return;
+    if (currentRenderRequest !== renderRequestId) {
+      return;
+    }
     pageViewEl.replaceChildren();
     mountPage(pageViewEl);
     // Prepend the page heading to the page view
@@ -177,17 +196,19 @@ async function renderCurrentRoute() {
   tabListEl.hidden = false;
   activateTab(tabEls[0]);
   const loadedPage = await page.render();
-  if (currentRenderRequest !== renderRequestId) return;
-  mainContentEl.querySelector('#tab-css').hidden = loadedPage.css.trim() === '';
+  if (currentRenderRequest !== renderRequestId) {
+    return;
+  }
+  mainContentEl.querySelector('#tabCss').hidden = loadedPage.css.trim() === '';
   tabEls = Array.from(tabListEl.querySelectorAll('[role="tab"]'));
   activateTab(tabEls[0]);
   setHighlightedCode(
-    mainContentEl.querySelector('#panel-js code'),
+    mainContentEl.querySelector('#panelJs code'),
     loadedPage.javascript,
     'javascript'
   );
   setHighlightedCode(
-    mainContentEl.querySelector('#panel-css code'),
+    mainContentEl.querySelector('#panelCss code'),
     loadedPage.css,
     'css'
   );

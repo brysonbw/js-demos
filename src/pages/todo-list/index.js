@@ -6,9 +6,9 @@ import './index.css';
  */
 function renderTodoList(container) {
   container.innerHTML = `
-    <form class="form" id="todo-form">
-      <label for="todo-input">New todo</label>
-      <input class="input" id="todo-input" type="text" placeholder="Add your todo" />
+    <form class="form" id="todoForm">
+      <label for="todoInput">New todo</label>
+      <input class="input" id="todoInput" type="text" placeholder="Add your todo" />
       <div class="form-actions">
         <button class="button button-primary" id="submit" type="submit">Submit</button>
       </div>
@@ -29,9 +29,9 @@ function renderTodoList(container) {
       </ul>
     `;
 
-  const inputEl = container.querySelector('#todo-input');
+  const inputEl = container.querySelector('#todoInput');
   const todoListEl = container.querySelector('#todoList');
-  const todoFormEl = container.querySelector('#todo-form');
+  const todoFormEl = container.querySelector('#todoForm');
 
   todoListEl.addEventListener('click', onTodoClick);
   todoFormEl.addEventListener('submit', addTodo);
