@@ -1,9 +1,9 @@
 name: Deploy To GitHub Pages
 
 on:
-  pull_request:
+  push:
     branches: ['main']
-    types: [closed]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/v')
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'chore: release v')"
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
