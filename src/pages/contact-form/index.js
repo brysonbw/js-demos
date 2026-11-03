@@ -1,4 +1,5 @@
 import './index.css';
+import '../../shared/styles/notification.css';
 
 /**
  * @param {HTMLElement} container
@@ -110,10 +111,17 @@ function renderContactForm(container) {
   /**
    * @param {string} type
    * @param {string} message
+   * @param {number} [duration]
    */
-  function renderNotification(type, message) {
+  function renderNotification(type, message, duration = 5000) {
     notificationEl.dataset.notificationType = type;
     notificationEl.textContent = message;
+    if (type !== 'error') {
+      setTimeout(() => {
+        notificationEl.textContent = '';
+        delete notificationEl.dataset.notificationType;
+      }, duration);
+    }
   }
 
   /**

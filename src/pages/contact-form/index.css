@@ -1,22 +1,3 @@
 label > span {
   color: red;
 }
-
-#notification[data-notification-type=''] {
-  display: none;
-}
-
-#notification[data-notification-type='error'],
-#notification[data-notification-type='success'] {
-  display: block;
-}
-
-#notification[data-notification-type='error'] {
-  color: red;
-  margin-top: 1rem;
-}
-
-#notification[data-notification-type='success'] {
-  color: rgb(88, 219, 88);
-  margin-top: 1rem;
-}
