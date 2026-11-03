@@ -1,5 +1,12 @@
 # js-demos
 
+## 0.5.0
+
+### Minor Changes
+
+- cddfc9d: Add stopwatch demo/page.
+- eeac347: Add kanban demo/page.
+
 ## 0.4.0
 
 ### Minor Changes
