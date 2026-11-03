@@ -15,7 +15,7 @@ describe('createPageHeading', () => {
       title: 'What is it?',
     });
     expect(header.querySelector('.eyebrow').textContent).toBe('Home');
-    expect(header.querySelector('#page-title').textContent).toBe('What is it?');
+    expect(header.querySelector('#pageTitle').textContent).toBe('What is it?');
     expect(header.querySelector('p:last-child').textContent).toBe(
       ROUTES.HOME.description
     );
@@ -25,7 +25,7 @@ describe('createPageHeading', () => {
     const header = createPageHeading(ROUTES.TODO_LIST.route);
     expect(header).toHaveClass('page-heading');
     expect(header.querySelector('.eyebrow').textContent).toBe('Demo 02');
-    expect(header.querySelector('#page-title').textContent).toBe(
+    expect(header.querySelector('#pageTitle').textContent).toBe(
       ROUTES.TODO_LIST.title
     );
     expect(header.querySelector('p:last-child').textContent).toBe(
