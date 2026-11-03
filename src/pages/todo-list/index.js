@@ -1,4 +1,5 @@
 import './index.css';
+import '../../shared/styles/notification.css';
 
 /**
  * @param {HTMLElement} container
@@ -6,9 +7,10 @@ import './index.css';
  */
 function renderTodoList(container) {
   container.innerHTML = `
-    <form class="form" id="todo-form">
-      <label for="todo-input">New todo</label>
-      <input class="input" id="todo-input" type="text" placeholder="Add your todo" />
+  <div class="notification" id="notification" role="alert" data-notification-type=""></div>
+    <form class="form" id="todoForm">
+      <label for="todoInput">New todo</label>
+      <input class="input" id="todoInput" type="text" placeholder="Add your todo" />
       <div class="form-actions">
         <button class="button button-primary" id="submit" type="submit">Submit</button>
       </div>
@@ -29,9 +31,11 @@ function renderTodoList(container) {
       </ul>
     `;
 
-  const inputEl = container.querySelector('#todo-input');
+  const inputEl = container.querySelector('#todoInput');
   const todoListEl = container.querySelector('#todoList');
-  const todoFormEl = container.querySelector('#todo-form');
+  const todoFormEl = container.querySelector('#todoForm');
+
+  const notificationEl = container.querySelector('#notification');
 
   todoListEl.addEventListener('click', onTodoClick);
   todoFormEl.addEventListener('submit', addTodo);
@@ -45,6 +49,7 @@ function renderTodoList(container) {
       const li = event.target.closest('li');
       if (li) {
         li.remove();
+        renderNotification('success', 'Todo deleted.');
       }
     }
   }
@@ -68,6 +73,25 @@ function renderTodoList(container) {
       todoListEl.appendChild(liEl);
       inputEl.value = '';
       inputEl.focus();
+      renderNotification('success', 'Todo added.');
+    } else {
+      renderNotification('error', 'Please enter a todo.');
+    }
+  }
+
+  /**
+   * @param {string} type
+   * @param {string} message
+   * @param {number} [duration]
+   */
+  function renderNotification(type, message, duration = 5000) {
+    notificationEl.dataset.notificationType = type;
+    notificationEl.textContent = message;
+    if (type !== 'error') {
+      setTimeout(() => {
+        notificationEl.textContent = '';
+        delete notificationEl.dataset.notificationType;
+      }, duration);
     }
   }
 }

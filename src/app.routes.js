@@ -44,6 +44,7 @@ export const routes = [
           import('./pages/contact-form/index.css?raw'),
           import('./shared/styles/form.css?raw'),
           import('./shared/styles/table.css?raw'),
+          import('./shared/styles/notification.css?raw'),
         ],
         (module) => module.renderContactForm
       ),
@@ -190,6 +191,22 @@ export const routes = [
           import('./shared/styles/button.css?raw'),
         ],
         (module) => module.renderStopwatch
+      ),
+  },
+  {
+    route: ROUTES.KANBAN_BOARD.route,
+    title: ROUTES.KANBAN_BOARD.title,
+    render: () =>
+      renderPage(
+        import('./pages/kanban-board/index.js'),
+        import('./pages/kanban-board/index.js?raw'),
+        [
+          import('./pages/kanban-board/index.css?raw'),
+          import('./shared/styles/form.css?raw'),
+          import('./shared/styles/dialog.css?raw'),
+          import('./shared/styles/button.css?raw'),
+        ],
+        (module) => module.renderKanbanBoard
       ),
   },
 ];

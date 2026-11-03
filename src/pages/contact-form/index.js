@@ -1,4 +1,5 @@
 import './index.css';
+import '../../shared/styles/notification.css';
 
 /**
  * @param {HTMLElement} container
@@ -8,7 +9,7 @@ function renderContactForm(container) {
   container.innerHTML = `
      <div id="notification" role="alert" data-notification-type=""></div>
 
-    <form class="form" id="contact-form">
+    <form class="form" id="contactForm">
       <label for="name">Name <span>*</span></label>
       <input class="input" id="name" name="name">
 
@@ -42,7 +43,7 @@ function renderContactForm(container) {
     </table>
   `;
 
-  const contactFormEl = container.querySelector('#contact-form');
+  const contactFormEl = container.querySelector('#contactForm');
   const nameInputEl = container.querySelector('#name');
   const mobileNumberInputEl = container.querySelector('#mobileNumber');
   const emailInputEl = container.querySelector('#email');
@@ -110,10 +111,17 @@ function renderContactForm(container) {
   /**
    * @param {string} type
    * @param {string} message
+   * @param {number} [duration]
    */
-  function renderNotification(type, message) {
+  function renderNotification(type, message, duration = 5000) {
     notificationEl.dataset.notificationType = type;
     notificationEl.textContent = message;
+    if (type !== 'error') {
+      setTimeout(() => {
+        notificationEl.textContent = '';
+        delete notificationEl.dataset.notificationType;
+      }, duration);
+    }
   }
 
   /**

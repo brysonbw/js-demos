@@ -9,6 +9,7 @@ const GITHUB_REPO_URL = 'https://github.com/brysonbw/js-demos';
 const STORAGE_KEY_NAMESPACE = APP_NAME.toLowerCase().replace(/\s+/g, '-');
 const STORAGE_KEYS = Object.freeze({
   THEME: `${STORAGE_KEY_NAMESPACE}-theme`,
+  KANBAN_BOARD: `${STORAGE_KEY_NAMESPACE}-kanban-board`,
 });
 
 const ROUTES = Object.freeze({
@@ -105,6 +106,13 @@ const ROUTES = Object.freeze({
       'A stopwatch to track elapsed time, with start, stop, and reset functionality.',
     hash: '#/stopwatch',
   }),
+  KANBAN_BOARD: Object.freeze({
+    route: 'kanban-board',
+    title: 'Kanban Board',
+    description:
+      'Organize tasks on a Kanban board with drag-and-drop, keyboard controls, and a WIP limit. Board state is saved locally.',
+    hash: '#/kanban-board',
+  }),
 });
 
 // Ordered list of demo pages - position determines the demo number display/text
@@ -120,6 +128,8 @@ const DEMO_LIST_ORDER = Object.freeze([
   ROUTES.PROGRESS_BARS,
   ROUTES.STAR_RATING,
   ROUTES.DATA_TABLE,
+  ROUTES.STOPWATCH,
+  ROUTES.KANBAN_BOARD,
 ]);
 
 export {

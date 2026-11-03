@@ -1,0 +1,66 @@
+:root {
+  --font-size: 1rem;
+  --line-height: 1.5;
+  --border-radius: 0.375rem;
+
+  --success-bg: #d1e7dd;
+  --success-border: #badbcc;
+  --success-text: #0f5132;
+
+  --error-bg: #f8d7da;
+  --error-border: #f5c2c7;
+  --error-text: #842029;
+
+  --warning-bg: #fff3cd;
+  --warning-border: #ffecb5;
+  --warning-text: #664d03;
+
+  --info-bg: #cff4fc;
+  --info-border: #b6effb;
+  --info-text: #055160;
+}
+
+#notification:not([data-notification-type]),
+#notification[data-notification-type=''] {
+  display: none;
+}
+
+#notification[data-notification-type='error'],
+#notification[data-notification-type='success'],
+#notification[data-notification-type='warning'],
+#notification[data-notification-type='info'] {
+  display: block;
+  position: relative;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  transition: opacity 0.15s linear;
+}
+
+#notification[data-notification-type='error'] {
+  color: var(--error-text);
+  background-color: var(--error-bg);
+  border-color: var(--error-border);
+}
+
+#notification[data-notification-type='success'] {
+  color: var(--success-text);
+  background-color: var(--success-bg);
+  border-color: var(--success-border);
+}
+
+#notification[data-notification-type='warning'] {
+  color: var(--warning-text);
+  background-color: var(--warning-bg);
+  border-color: var(--warning-border);
+}
+
+#notification[data-notification-type='info'] {
+  color: var(--info-text);
+  background-color: var(--info-bg);
+  border-color: var(--info-border);
+}

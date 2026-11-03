@@ -59,10 +59,10 @@ function createSidebar(routes) {
 
   const dialogEl = document.createElement('dialog');
   dialogEl.className = 'mobile-page-dialog';
-  dialogEl.setAttribute('aria-labelledby', 'mobile-menu-title');
+  dialogEl.setAttribute('aria-labelledby', 'mobileMenuTitle');
   dialogEl.innerHTML = `
     <div class="mobile-menu-header">
-      <h2 id="mobile-menu-title">Browse</h2>
+      <h2 id="mobileMenuTitle">Browse</h2>
       <button class="dialog-close" type="button" aria-label="Close menu">×</button>
     </div>
     <nav class="mobile-menu-navigation" aria-label="Page navigation">
@@ -100,8 +100,12 @@ function createSidebar(routes) {
    * @returns {void}
    */
   function onDialogClick(event) {
-    if (event.target === dialogEl) dialogEl.close();
-    if (event.target.closest('[data-page-id]')) dialogEl.close();
+    if (event.target === dialogEl) {
+      dialogEl.close();
+    }
+    if (event.target.closest('[data-page-id]')) {
+      dialogEl.close();
+    }
   }
 
   const closeButtonEl = dialogEl.querySelector('.dialog-close');

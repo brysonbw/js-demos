@@ -51,7 +51,7 @@ function createPageHeading(route, overrides = {}) {
   eyebrowEl.textContent = overrides.eyebrow ?? `Demo ${getDemoNumber(route)}`;
 
   const titleEl = document.createElement('h1');
-  titleEl.id = 'page-title';
+  titleEl.id = 'pageTitle';
   titleEl.textContent = overrides.title ?? entry.title;
 
   const descriptionEl = document.createElement('p');
@@ -61,4 +61,32 @@ function createPageHeading(route, overrides = {}) {
   return headerEl;
 }
 
-export { createPageHeading, getDemoNumber, padIndex, stripModuleSyntax };
+/**
+ * Escapes special HTML characters in a string to prevent XSS attacks.
+ * @param {unknown} input
+ * @returns {string}
+ */
+function escapeHtml(input) {
+  if (input == null) {
+    return '';
+  }
+  const str = typeof input === 'string' ? input : String(input);
+
+  const charactersMap = new Map([
+    ['&', '&amp;'],
+    ['<', '&lt;'],
+    ['>', '&gt;'],
+    ['"', '&quot;'],
+    ["'", '&#39;'],
+  ]);
+
+  return str.replace(/[&<>"']/g, (char) => charactersMap.get(char));
+}
+
+export {
+  createPageHeading,
+  getDemoNumber,
+  padIndex,
+  stripModuleSyntax,
+  escapeHtml,
+};
